@@ -4,6 +4,7 @@ public class doubleLinkedList<t> {
     doubleNode head;
     doubleNode tail;
     int length;
+
     public doubleLinkedList(){
         this.length = 0;
         this.head = null;
@@ -140,4 +141,5 @@ public class doubleLinkedList<t> {
         }
         System.out.println();
     }
+
 }

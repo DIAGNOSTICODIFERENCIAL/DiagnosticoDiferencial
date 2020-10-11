@@ -1,4 +1,4 @@
-package src;
+package structures;
 
 public class DoubleList<T> {
     int length;
