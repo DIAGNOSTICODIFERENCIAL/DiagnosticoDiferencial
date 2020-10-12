@@ -27,7 +27,11 @@ public class doubleLinkedList<t> {
 
     public void append(t data){
         if(length==0){
-            insertAt(0,data);
+            this.head = new doubleNode(data);
+            this.tail = this.head;
+            this.tail.prev = this.head;
+            this.head.next = this.tail;
+            this.length++;
             return;
         }
         doubleNode tmp = this.tail;
@@ -88,7 +92,7 @@ public class doubleLinkedList<t> {
     }
 
     public void insertAt(int index,t data){
-        if(index>=length || index<0){
+        if(index!=0 && index>=length || index<0){
             System.out.println("Index out of range");
             return;
         }
@@ -141,5 +145,4 @@ public class doubleLinkedList<t> {
         }
         System.out.println();
     }
-
 }
