@@ -2,14 +2,14 @@ package src.diagnosisTools;
 import structures.*;
 public class diagnosticoArrays {
 
-    doubleLinkedList<enfermedadDoubleList> resultadoDiagnostico;
+    doubleLinkedList<enfermedad> resultadoDiagnostico;
 
-    public void diagnostico(enfermedadArray enfermedadPaciente, enfermedadArray[] Enfermedades){
+    public void diagnostico(enfermedad enfermedadPaciente, doubleLinkedList Enfermedades){
         resultadoDiagnostico = new doubleLinkedList<>();
-        for(int i=0; i<Enfermedades.length;i++) {
+        for(int i=0; i<Enfermedades.length();i++) {
             //análisis síntomas:
-            enfermedadArray enfermedadX = Enfermedades[i];// Analizaremos enfermedad una por una
-            enfermedadDoubleList enfermedadTmp = new enfermedadDoubleList
+            enfermedad enfermedadX = (enfermedad)Enfermedades.getK(i);// Analizaremos enfermedad una por una
+            enfermedad enfermedadTmp = new enfermedad
                     (interseccionArreglos(enfermedadX.signos,enfermedadPaciente.signos)
                     ,interseccionArreglos(enfermedadX.sintomas,enfermedadPaciente.sintomas));
             resultadoDiagnostico.append(enfermedadTmp);
@@ -20,23 +20,23 @@ public class diagnosticoArrays {
     /*Metodo que recibe sintomas o signos de las enfermedades a comparar y encuentra la intersección entre las listas.
     Retorna un arreglo con los matches para cada enfermedad.
      */
-    public doubleLinkedList<String> interseccionArreglos(String[] caracteristicaEnfermedadX, String[] caracteristicaEnfermedadPaciente){
-        int lenghtEnfermedadPaciente = caracteristicaEnfermedadPaciente.length;
-        int lenghtEnfermedad = caracteristicaEnfermedadX.length;
+    public stringDoubleLinkedList interseccionArreglos(stringDoubleLinkedList caracteristicaEnfermedadX, stringDoubleLinkedList caracteristicaEnfermedadPaciente){
+        int lenghtEnfermedadPaciente = caracteristicaEnfermedadPaciente.length();
+        int lenghtEnfermedad = caracteristicaEnfermedadX.length();
         int n = Math.max(lenghtEnfermedad, lenghtEnfermedadPaciente);
         /*Definimos dos apuntadores para encontrar la intersección de las listas, si son iguales ambos aumentan
         si no, aumenta el indice que apunte al elemento menor*/
         int i=0;//Apunta a enfermedadPaciente;
         int j = 0;//Apunta a enfermedadX
-        doubleLinkedList<String> commonItems = new doubleLinkedList();
+        stringDoubleLinkedList commonItems = new stringDoubleLinkedList();
         for(int idx=0; idx<n; idx++){
             if(i<lenghtEnfermedad && i<lenghtEnfermedadPaciente){
-                if(caracteristicaEnfermedadPaciente[i].equals(caracteristicaEnfermedadX[j])){
+                if(caracteristicaEnfermedadPaciente.getK(i).equals(caracteristicaEnfermedadX.getK(j))){
                     //Crear objeto respuesta
-                    commonItems.append(caracteristicaEnfermedadPaciente[i]);
+                    commonItems.append(caracteristicaEnfermedadPaciente.getK(i));
                     i++;j++;
                 }
-                else if(caracteristicaEnfermedadPaciente[i].compareTo(caracteristicaEnfermedadX[j])<0){
+                else if(caracteristicaEnfermedadPaciente.getK(i).compareTo(caracteristicaEnfermedadX.getK(j))<0){
                     i++;
                 }
                 else{

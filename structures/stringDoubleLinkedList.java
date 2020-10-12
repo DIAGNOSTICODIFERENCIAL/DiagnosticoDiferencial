@@ -145,6 +145,16 @@ public class stringDoubleLinkedList {
         }
         System.out.println();
     }
+    public String toString(){
+        String ans = "";
+        stringDoubleNode tmp = head;
+        if(length==0) ans="Empty List";
+        for(int i=0; i<length;i++){
+            ans = tmp.data+" ";
+            tmp = tmp.next;
+        }
+        return ans;
+    }
     /*-----------------------Merge Sort--------------------------------------------*/
     public void sort(){
         this.head = mergeSort(this.head);
