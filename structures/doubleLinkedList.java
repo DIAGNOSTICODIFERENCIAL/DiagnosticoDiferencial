@@ -1,5 +1,7 @@
 package structures;
 
+import src.diagnosisTools.enfermedad;
+
 public class doubleLinkedList<t> {
     doubleNode head;
     doubleNode tail;
@@ -144,5 +146,76 @@ public class doubleLinkedList<t> {
             tmp = tmp.next;
         }
         System.out.println();
+    }
+    public String toString(){
+        String ans = "";
+        doubleNode tmp = head;
+        if(length==0) ans="Empty List";
+        for(int i=0; i<length;i++){
+            ans = ans + tmp.data+" ";
+            tmp = tmp.next;
+        }
+        return ans;
+    }
+    /*-----------------------Merge Sort--------------------------------------------*/
+    public void sort(){
+        this.head = mergeSort(this.head);
+    }
+    public doubleNode mergeSort(doubleNode head){
+        //Caso base, si es nula o es de longitud 1
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        // Obtenemos la mitad de la lista
+        doubleNode middle = getMiddle(head);
+        doubleNode nextofmiddle = middle.next;
+
+        // set the next of middle node to null
+        middle.next = null;
+
+        // Apply mergeSort on left list
+        doubleNode left = mergeSort(head);
+
+        // Apply mergeSort on right list
+        doubleNode right = mergeSort(nextofmiddle);
+
+        // Merge the left and right lists
+        doubleNode sortedlist = mergeLists(left, right);
+        return sortedlist;
+
+    }
+    public doubleNode mergeLists(doubleNode a, doubleNode b){
+        doubleNode result = null;
+        /* Base cases */
+        if (a == null)
+            return b;
+        if (b == null)
+            return a;
+
+        /* Pick either a or b, and recur */
+        if (((enfermedad) a.data).signos.length+((enfermedad) a.data).sintomas.length>((enfermedad) b.data).signos.length+((enfermedad) b.data).sintomas.length){
+            result = a;
+            result.next = mergeLists(a.next, b);
+        }
+        else {
+            result = b;
+            result.next = mergeLists(a, b.next);
+        }
+        return result;
+
+
+    }
+    public doubleNode getMiddle(doubleNode head){
+        if (head == null)
+            return head;
+
+        doubleNode slow = head, fast = head;
+
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
     }
 }

@@ -2,15 +2,20 @@ package src.diagnosisTools;
 import structures.*;
 public class diagnosticoArrays {
 
-    doubleLinkedList<enfermedad> resultadoDiagnostico;
+    public doubleLinkedList<enfermedad> resultadoDiagnostico;
 
+    public doubleLinkedList<enfermedad> getDiagnostico(){
+        return resultadoDiagnostico;
+    }
     public void diagnostico(enfermedad enfermedadPaciente, doubleLinkedList Enfermedades){
         resultadoDiagnostico = new doubleLinkedList<>();
+        System.out.println(Enfermedades.length());
         for(int i=0; i<Enfermedades.length();i++) {
             //análisis síntomas:
             enfermedad enfermedadX = (enfermedad)Enfermedades.getK(i);// Analizaremos enfermedad una por una
             enfermedad enfermedadTmp = new enfermedad
-                    (interseccionArreglos(enfermedadX.signos,enfermedadPaciente.signos)
+                    (enfermedadX.name,
+                    interseccionArreglos(enfermedadX.signos,enfermedadPaciente.signos)
                     ,interseccionArreglos(enfermedadX.sintomas,enfermedadPaciente.sintomas));
             resultadoDiagnostico.append(enfermedadTmp);
             //los datos se reciben ordenados
@@ -46,4 +51,6 @@ public class diagnosticoArrays {
         }
         return commonItems;
     }
+
+
 }

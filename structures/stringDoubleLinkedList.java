@@ -42,7 +42,6 @@ public class stringDoubleLinkedList {
 
     public String getK(int index) {
         if(index>length || index<0){
-            System.out.println("Index out of range");
             stringDoubleNode aux = new stringDoubleNode("0");
             return (String) aux.data;
         }
@@ -54,10 +53,11 @@ public class stringDoubleLinkedList {
         }
         else{
             stringDoubleNode aux = this.head;
-            for(int i = 0; i < index; i++){
+            //si algo quitar ese -1 jaja
+            for(int i = 0; i < index-1; i++){
                 aux = aux.next;
             }
-            return (String) aux.data;
+            return aux.data;
         }
     }
 
@@ -150,9 +150,10 @@ public class stringDoubleLinkedList {
         stringDoubleNode tmp = head;
         if(length==0) ans="Empty List";
         for(int i=0; i<length;i++){
-            ans = tmp.data+" ";
+            ans = ans + tmp.data+" ";
             tmp = tmp.next;
         }
+        ans = ans + "\n";
         return ans;
     }
     /*-----------------------Merge Sort--------------------------------------------*/

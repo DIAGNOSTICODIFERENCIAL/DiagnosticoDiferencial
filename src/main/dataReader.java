@@ -1,5 +1,6 @@
 package src.main;
 import java.io.*;
+import java.sql.SQLOutput;
 
 import src.diagnosisTools.enfermedad;
 import structures.*;
@@ -18,25 +19,69 @@ public class dataReader {
             System.out.println("F");
         }
     }
-    public doubleLinkedList read() throws IOException {
+    public doubleLinkedList readList() throws IOException {
         int i=0;
         String st;
         doubleLinkedList<enfermedad> enfermedades = new doubleLinkedList<enfermedad>();
         enfermedad tmpEnfermedad = new enfermedad();
         while ((st = this.br.readLine()) != null){
-            if(i%3==0){
+            //System.out.println(i);
+            if(i%4==0){
                 if(i!=0){
+                    tmpEnfermedad.sort();
                     enfermedades.append(tmpEnfermedad);
                 }
                 tmpEnfermedad = new enfermedad();
+                i++;
+                continue;
             }
-            if(i%3==1){
-                tmpEnfermedad.sintomas.append(st);
-            }if(i%3==2){
-                tmpEnfermedad.signos.append(st);
+            String[] parts = st.split(":");
+            String name = parts[1];
+            String functionalPart = parts[1];
+            String[] caracteristicas = functionalPart.split(", ");
+            if(i%4==1){
+                tmpEnfermedad.setName(name);
+            }
+            if(i%4==2){
+                for(int j=0; j<caracteristicas.length;j++){
+                    tmpEnfermedad.sintomas.append(caracteristicas[j]);
+                }
+
+            }if(i%4==3){
+                for(int j=0; j<caracteristicas.length;j++){
+                    tmpEnfermedad.signos.append(caracteristicas[j]);
+                }
             }
             i++;
         }
         return enfermedades;
+    }
+    public enfermedad readOne()throws IOException{
+        int i=0;
+        String st;
+        enfermedad enfermedadP = new enfermedad();
+        while ((st = this.br.readLine()) != null){
+            if(i==0){i++;continue;}
+            String[] parts = st.split(":");
+            String name = parts[0];
+            String functionalPart = parts[1];
+            String[] caracteristicas = functionalPart.split(", ");
+            if(i%4==1){
+                enfermedadP.setName(name);
+            }
+            if(i%4==2){
+                for(int j=0; j<caracteristicas.length;j++){
+                    enfermedadP.sintomas.append(caracteristicas[j]);
+                }
+
+            }if(i%4==3){
+                for(int j=0; j<caracteristicas.length;j++){
+                    enfermedadP.signos.append(caracteristicas[j]);
+                }
+            }
+            i++;
+        }
+        enfermedadP.sort();
+        return enfermedadP;
     }
 }
