@@ -19,6 +19,7 @@ public class Window extends JFrame {
     String name;
     dataReader dr;
     dataReader dr2;
+    history historial;
     doubleLinkedList<enfermedad> enfermedades;
     enfermedad enfermedadPaciente;
 
@@ -31,6 +32,7 @@ public class Window extends JFrame {
         setTitle("Diagnóstico Diferencial");
         setLocationRelativeTo(null);//centrar ventana
         setBackground(Color.blue);
+        historial = new history();
         Components();
     }
 
@@ -66,9 +68,20 @@ public class Window extends JFrame {
         }
         panel.add(Tinput);
 
+        JButton BHistorial = new JButton("Historial de Diagnosticos");
+        BHistorial.setBounds(400, 730, 300, 20);
+        panel.add(BHistorial);
+
         JTable table = new JTable();
         table.setBounds(100, 140, 300, 300);
 
+        ActionListener mostrarHistorial = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                //mostrar Historial
+            }
+        };
+        BHistorial.addActionListener(mostrarHistorial);
         ActionListener cargarPaciente = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -93,6 +106,7 @@ public class Window extends JFrame {
                 diagnosticoArrays diagnostico = new diagnosticoArrays();
                 diagnostico.diagnostico(enfermedadPaciente,enfermedades);
                 diagnostico.resultadoDiagnostico.sort();
+                historial.addSearch(diagnostico.resultadoDiagnostico);
                 data = diagnostico.resultadoDiagnostico.toString();
                 String sinSaltos = data.replaceAll("\n", "<br> ");
                 String[] parts = sinSaltos.split("Enfermedad:");
