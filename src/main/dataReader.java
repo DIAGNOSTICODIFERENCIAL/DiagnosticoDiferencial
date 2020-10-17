@@ -19,6 +19,20 @@ public class dataReader {
             System.out.println("F");
         }
     }
+    public String readPlain() throws  IOException{
+        int i=0;
+        String content = "\n";
+        String st;
+        while ((st = this.br.readLine()) != null){
+            if(i==0){
+                i++;
+                continue;
+            }
+            content = content + st+"\n";
+            i++;
+        }
+        return content;
+    }
     public doubleLinkedList readList() throws IOException {
         int i=0;
         String st;
