@@ -6,11 +6,13 @@ import java.io.IOException;
 
 public class main {
     public static void main(String[] args) throws IOException {
+        Window v1 = new Window("ventana");
+        v1.setVisible(true);
 
-        dataReader dr = new dataReader("muestra.txt");
+        dataReader dr = new dataReader("muestra2.txt");
         dataReader dr2 = new dataReader("enfermedadPaciente.txt");
         doubleLinkedList<enfermedad> enfermedades = dr.readList();
-        System.out.println(enfermedades.length());
+        //System.out.println(enfermedades.length());
         //System.out.println(enfermedades);
         //System.out.println(enfe1);
         enfermedad enfermedadPaciente = dr2.readOne();
@@ -18,6 +20,6 @@ public class main {
         diagnosticoArrays diagnostico = new diagnosticoArrays();
         diagnostico.diagnostico(enfermedadPaciente,enfermedades);
         diagnostico.resultadoDiagnostico.sort();
-        System.out.println(diagnostico.resultadoDiagnostico);
+        v1.data= diagnostico.resultadoDiagnostico.toString();
     }
 }
