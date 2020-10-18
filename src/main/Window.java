@@ -4,6 +4,7 @@ package src.main;
 import src.diagnosisTools.diagnosticoArrays;
 import src.diagnosisTools.enfermedad;
 import structures.doubleLinkedList;
+import structures.dynamicArray;
 
 import java.awt.*;
 import javax.swing.*;
@@ -18,6 +19,7 @@ import javax.swing.text.DefaultStyledDocument;
 public class Window extends JFrame {
     String data;
     String name;
+    Boolean actived = true;
     dataReader dr;
     dataReader dr2;
     history historial;
@@ -27,6 +29,7 @@ public class Window extends JFrame {
     public Window(String name){
         dr = new dataReader("muestra2.txt");
         dr2 = new dataReader("enfermedadPaciente.txt");
+        dynamicArray array = new dynamicArray();
         this.name=name;
         setSize(700,900); // se establece el tamaño de la ventana
         setDefaultCloseOperation(EXIT_ON_CLOSE);// Para que el programa se  cierre al darle a la x
@@ -38,16 +41,16 @@ public class Window extends JFrame {
     }
 
     public void Components(){
-        JPanel panel = new JPanel();
+        JLayeredPane  panel = new JLayeredPane();
         panel.setLayout(null);
-        panel.setBackground(Color.GRAY);
+        panel.setBackground(Color.BLACK);
         this.getContentPane().add(panel);
 
         JLabel titulo = new JLabel("Diagnóstico Diferencial");
         titulo.setBounds(240, 10, 300, 20);
         titulo.setFont(new Font("Serif", Font.PLAIN, 20));
-        
 
+        
         //titulo.setFont();
         panel.add(titulo);
 
@@ -65,7 +68,7 @@ public class Window extends JFrame {
         panel.add(BPaciente);
 
         JTextArea Tinput = new JTextArea();
-        Tinput.setBounds(100, 70, 480, 200);
+        Tinput.setBounds(100, 70, 480, 100);
         try {
             Tinput.setText(dr2.readPlain());
         } catch (IOException e) {
@@ -74,21 +77,21 @@ public class Window extends JFrame {
         panel.add(Tinput);
 
         JButton BHistorial = new JButton("Historial de Diagnosticos");
-        BHistorial.setBounds(180, 40, 300, 20);
+        BHistorial.setBounds(180, 50, 300, 20);
         panel.add(BHistorial);
 
         JTable table = new JTable();
         table.setBounds(100, 140, 450, 300);
 
         JButton Bprev = new JButton("volver");
-        Bprev.setBounds(490, 40, 90, 20);
+        Bprev.setBounds(490, 50, 90, 20);
         Bprev.setVisible(false);
         panel.add(Bprev);
 
         ActionListener mostrarinput = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                Tinput.setVisible(false);
+                
             }
         };
         Bfind.addActionListener(mostrarinput);
@@ -109,6 +112,32 @@ public class Window extends JFrame {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 //mostrar Historial
+                
+                JList listhistorial = new JList(); // lista donde se van a mostrar las búsquedas
+                panel.add(listhistorial);
+                String [] busquedas = new String[historial.size];
+                
+                for(int i =0; i<historial.size; i++){ // se recorre el array
+                    Object lista = historial.historial.get(i);
+                    busquedas[i]=lista.toString(); // se añade la doublelinkedlist en formato String 
+                }
+                listhistorial.setModel(new javax.swing.AbstractListModel<String>() {
+                    
+                    public int getSize() { return busquedas.length; }
+                    public String getElementAt(int i) { return busquedas[i]; }
+                });
+                
+                listhistorial.setBounds(180, 70, 300, 100);
+             
+                if (actived==true){
+                    listhistorial.setVisible(true);
+                    actived = false;
+                }else{
+                    listhistorial.setVisible(false);
+                    actived = true;
+
+                }
+
             }
         };
         BHistorial.addActionListener(mostrarHistorial);
@@ -170,7 +199,7 @@ public class Window extends JFrame {
         BLoad.addActionListener(loadData);
     }
 
-    public void showdata(Object[][] datos, JPanel panel, JTable table) {
+    public void showdata(Object[][] datos, JLayeredPane panel, JTable table) {
         String[] columnas = {"Enfermedad", 
         "Signos", 
         "Sintomas"};
@@ -186,7 +215,7 @@ public class Window extends JFrame {
         table.setRowHeight(180);
 
         
-        table.setBounds(100, 130, 480, 500);
+        table.setBounds(100, 150, 480, 500);
  
 
     }

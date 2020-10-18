@@ -2,15 +2,16 @@ package src.main;
 import structures.*;
 
 public class history {
-    doubleLinkedList<doubleLinkedList> historial;
+    dynamicArray historial; //se usa un array para guardar las búsquedas
     int size;
 
     public history(){
-        historial = new doubleLinkedList<doubleLinkedList>();
+        historial = new dynamicArray();
         size = 0;
     }
     public void addSearch(doubleLinkedList lista){
-        historial.append(lista);
+        historial.insert(lista);
         size++;
     }
+
 }

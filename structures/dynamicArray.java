@@ -1,13 +1,13 @@
 package structures;
 
 public class dynamicArray {
-    private int[] array;
+    private Object[] array;
     private int size;
     private int capacity;
     public static int number = 0;
 
     public dynamicArray(){
-        this.array = new int[2];
+        this.array = new Object[2];
         this.size = 0;
         this.capacity = 2;
         number++;
@@ -17,7 +17,7 @@ public class dynamicArray {
         return this.size;
     }
 
-    public int get(int index){
+    public Object get(int index) {
         if(index >= size || index < 0){
             System.out.println("Índice no permitido");
             return Integer.MIN_VALUE;
@@ -36,7 +36,7 @@ public class dynamicArray {
         this.size++;
     }
 
-    public void insert(int value){ //PUSHBACK
+    public <T> void insert(T value) { // PUSHBACK
         if(this.size == this.capacity) this.resize(2);
         this.array[this.size++] = value;
     }
@@ -52,7 +52,7 @@ public class dynamicArray {
             System.out.println("Índice no permitido");
             return;
         }
-        int[] newArray = new int[this.capacity];
+        Object[] newArray = new Object[this.capacity];
         for(int i = 0; i < index; i++)
             newArray[i] = this.array[i];
         for (int j = index+1; j < this.size;j++)
@@ -72,7 +72,7 @@ public class dynamicArray {
     }
 
     private void resize(int mult){
-        int[] newArray = new int[mult*this.size];
+        Object[] newArray = new  Object[mult * this.size];
         for(int i = 0; i < this.size; i++)
             newArray[i] = this.array[i];
         this.capacity *= mult;
