@@ -1,7 +1,6 @@
 
 package src.main;
 
-
 import src.diagnosisTools.diagnosticoArrays;
 import src.diagnosisTools.enfermedad;
 import structures.doubleLinkedList;
@@ -11,6 +10,8 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import javax.swing.text.DefaultStyledDocument;
 
@@ -27,7 +28,7 @@ public class Window extends JFrame {
         dr = new dataReader("muestra2.txt");
         dr2 = new dataReader("enfermedadPaciente.txt");
         this.name=name;
-        setSize(500,700); // se establece el tamaño de la ventana
+        setSize(700,900); // se establece el tamaño de la ventana
         setDefaultCloseOperation(EXIT_ON_CLOSE);// Para que el programa se  cierre al darle a la x
         setTitle("Diagnóstico Diferencial");
         setLocationRelativeTo(null);//centrar ventana
@@ -43,24 +44,28 @@ public class Window extends JFrame {
         this.getContentPane().add(panel);
 
         JLabel titulo = new JLabel("Diagnóstico Diferencial");
-        titulo.setBounds(170, 10, 300, 20);;
+        titulo.setBounds(240, 10, 300, 20);
+        titulo.setFont(new Font("Serif", Font.PLAIN, 20));
+        
+
         //titulo.setFont();
         panel.add(titulo);
 
         JButton BLoad = new JButton("Cargar Base de Datos");
-        BLoad.setBounds(100, 600, 300, 20);
+        BLoad.setBounds(100, 630, 200, 20);
         panel.add(BLoad);
 
-        JButton Bfind = new JButton("Buscar enfermedad asociada");
-        Bfind.setBounds(100, 730, 300, 20);
+
+        JButton Bfind = new JButton("Diagnóstico");
+        Bfind.setBounds(230, 660, 200, 20);
         panel.add(Bfind);
 
         JButton BPaciente = new JButton("Cargar enfermedad Paciente");
-        BPaciente.setBounds(100, 830, 300, 20);
+        BPaciente.setBounds(380, 630, 200, 20);
         panel.add(BPaciente);
 
         JTextArea Tinput = new JTextArea();
-        Tinput.setBounds(100, 70, 800, 500);
+        Tinput.setBounds(100, 70, 480, 200);
         try {
             Tinput.setText(dr2.readPlain());
         } catch (IOException e) {
@@ -69,11 +74,36 @@ public class Window extends JFrame {
         panel.add(Tinput);
 
         JButton BHistorial = new JButton("Historial de Diagnosticos");
-        BHistorial.setBounds(400, 730, 300, 20);
+        BHistorial.setBounds(180, 40, 300, 20);
         panel.add(BHistorial);
 
         JTable table = new JTable();
-        table.setBounds(100, 140, 300, 300);
+        table.setBounds(100, 140, 450, 300);
+
+        JButton Bprev = new JButton("volver");
+        Bprev.setBounds(490, 40, 90, 20);
+        Bprev.setVisible(false);
+        panel.add(Bprev);
+
+        ActionListener mostrarinput = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                Tinput.setVisible(false);
+            }
+        };
+        Bfind.addActionListener(mostrarinput);
+
+        ActionListener mostrartabla = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                table.setVisible(false);
+                Tinput.setVisible(true);
+                
+            }
+        };
+
+        Bprev.addActionListener(mostrartabla);
+        
 
         ActionListener mostrarHistorial = new ActionListener() {
             @Override
@@ -101,7 +131,8 @@ public class Window extends JFrame {
         ActionListener accion = new ActionListener(){//Hace la busqueda y muestra los resultados
             @Override
             public void actionPerformed(ActionEvent ae){
-
+                Bprev.setVisible(true);
+                table.setVisible(true);
 
                 diagnosticoArrays diagnostico = new diagnosticoArrays();
                 diagnostico.diagnostico(enfermedadPaciente,enfermedades);
@@ -117,7 +148,7 @@ public class Window extends JFrame {
                     
                     
                     };
-                showdata(datap,panel);
+                showdata(datap,panel, table);
             }
         };
         Bfind.addActionListener(accion);
@@ -127,7 +158,9 @@ public class Window extends JFrame {
             public void actionPerformed(ActionEvent actionEvent) {
                 enfermedades = null;
                 try {
+                    dr = new dataReader("muestra2.txt");
                     enfermedades = dr.readList();
+                    
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -137,13 +170,13 @@ public class Window extends JFrame {
         BLoad.addActionListener(loadData);
     }
 
-    public void showdata(Object[][] datos, JPanel panel) {
+    public void showdata(Object[][] datos, JPanel panel, JTable table) {
         String[] columnas = {"Enfermedad", 
         "Signos", 
         "Sintomas"};
         
-        JTable table = new JTable(datos, columnas);
-       
+        DefaultTableModel modelo = new DefaultTableModel(datos, columnas);
+        table.setModel(modelo);
         panel.add(table);
         //panel.add(table.getTableHeader());
         //table.getTableHeader().setBounds(100, 130, 300, 20);
@@ -153,7 +186,7 @@ public class Window extends JFrame {
         table.setRowHeight(180);
 
         
-        table.setBounds(50, 150, 420, 500);
+        table.setBounds(100, 130, 480, 500);
  
 
     }
