@@ -4,37 +4,6 @@
 ├── generador_datos.py
 ├── muestra2.txt
 ├── muestra.txt
-├── out
-│   └── production
-│       └── diagnosticoDiferencial
-│           ├── diagnosticoDiferencial.iml
-│           ├── enfermedadPaciente.txt
-│           ├── generador_datos.py
-│           ├── muestra2.txt
-│           ├── muestra.txt
-│           ├── src
-│           │   ├── diagnosisTools
-│           │   │   ├── diagnosticoArrays.class
-│           │   │   └── enfermedad.class
-│           │   └── main
-│           │       ├── dataReader.class
-│           │       ├── main.class
-│           │       ├── Window$1.class
-│           │       ├── Window$2.class
-│           │       ├── Window$3.class
-│           │       └── Window.class
-│           └── structures
-│               ├── DNode.class
-│               ├── doubleLinkedList.class
-│               ├── DoubleList.class
-│               ├── doubleNode.class
-│               ├── dynamicArray.class
-│               ├── queue.class
-│               ├── simpleLinkedList.class
-│               ├── simpleNode.class
-│               ├── Stack.class
-│               ├── stringDoubleLinkedList.class
-│               └── stringDoubleNode.class
 ├── src
 │   ├── diagnosisTools
 │   │   ├── diagnosticoArrays.java
