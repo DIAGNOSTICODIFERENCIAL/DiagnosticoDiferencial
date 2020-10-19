@@ -25,7 +25,7 @@ public class dynamicArray {
         return this.array[index];
     }
 
-    public void insert(int index, int value){
+    public <T> void insert(int index, T value) {
         if(index >= size || index < 0)
             System.out.println("Índice no permitido");
         if(this.size == this.capacity)
@@ -41,10 +41,10 @@ public class dynamicArray {
         this.array[this.size++] = value;
     }
 
-    public void set(int index, int value){
+    public <T> void set(int index, T value) {
         if(index >= size || index < 0)
             System.out.println("Índice no permitido");
-        this.array[index] = value;
+        this.array[index] =  value;
     }
 
     public void delete(int index){

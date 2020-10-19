@@ -16,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import javax.swing.text.DefaultStyledDocument;
 
+
 public class Window extends JFrame {
     String data;
     String name;
@@ -25,6 +26,7 @@ public class Window extends JFrame {
     history historial;
     doubleLinkedList<enfermedad> enfermedades;
     enfermedad enfermedadPaciente;
+    JScrollPane scrollPaneles;
 
     public Window(String name){
         dr = new dataReader("muestra2.txt");
@@ -44,11 +46,14 @@ public class Window extends JFrame {
         JLayeredPane  panel = new JLayeredPane();
         panel.setLayout(null);
         panel.setBackground(Color.BLACK);
+        panel.setPreferredSize(new Dimension(700,700));
         this.getContentPane().add(panel);
 
         JLabel titulo = new JLabel("Diagnóstico Diferencial");
         titulo.setBounds(240, 10, 300, 20);
         titulo.setFont(new Font("Serif", Font.PLAIN, 20));
+
+   
 
         
         //titulo.setFont();
@@ -101,6 +106,7 @@ public class Window extends JFrame {
             public void actionPerformed(ActionEvent actionEvent) {
                 table.setVisible(false);
                 Tinput.setVisible(true);
+                panel.remove(table);
                 
             }
         };
