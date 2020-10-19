@@ -128,6 +128,7 @@ public class Window extends JFrame {
                 });
                 
                 listhistorial.setBounds(180, 70, 300, 100);
+                
              
                 if (actived==true){
                     listhistorial.setVisible(true);
@@ -166,7 +167,7 @@ public class Window extends JFrame {
                 diagnosticoArrays diagnostico = new diagnosticoArrays();
                 diagnostico.diagnostico(enfermedadPaciente,enfermedades);
                 diagnostico.resultadoDiagnostico.sort();
-                historial.addSearch(diagnostico.resultadoDiagnostico);
+                historial.addSearch(enfermedadPaciente.toString());
                 data = diagnostico.resultadoDiagnostico.toString();
                 String sinSaltos = data.replaceAll("\n", "<br> ");
                 String[] parts = sinSaltos.split("Enfermedad:");

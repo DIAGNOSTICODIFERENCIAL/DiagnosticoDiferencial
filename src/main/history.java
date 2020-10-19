@@ -9,7 +9,7 @@ public class history {
         historial = new dynamicArray();
         size = 0;
     }
-    public void addSearch(doubleLinkedList lista){
+    public void addSearch(String lista){
         historial.insert(lista);
         size++;
     }

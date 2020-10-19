@@ -77,7 +77,7 @@ public class dataReader {
         while ((st = this.br.readLine()) != null){
             if(i==0){i++;continue;}
             String[] parts = st.split(":");
-            String name = parts[0];
+            String name = parts[1];
             String functionalPart = parts[1];
             String[] caracteristicas = functionalPart.split(", ");
             if(i%4==1){
