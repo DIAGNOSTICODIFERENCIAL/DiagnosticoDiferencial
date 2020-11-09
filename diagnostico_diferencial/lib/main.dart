@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -13,54 +14,77 @@ class MyApp extends StatelessWidget{
   Widget build(BuildContext context){
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: Text(""),
+          appBar: AppBar(
+            title: Text("Diagnóstico diferencial"),
+            centerTitle: true,
+          ),
+          backgroundColor: Color(softBlue),
+        drawer: Drawer(
+            child: ListView(
+                padding: EdgeInsets.zero,
+                children: [
+                  DrawerHeader(
+                    decoration: BoxDecoration(
+                      color: Colors.blue
+                    ),
+
+                  ),
+
+                  ListTile(
+                    leading: Icon(Icons.person),
+                    title: Text("Perfil"),
+                    onTap:() {},
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.medical_services),
+                    title: Text("Diagnosticar"),
+                    onTap:() {},
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.pending_actions_rounded),
+                    title: Text("Historial de diagnosticos"),
+                  ),
+
+                ],
+            ),
         ),
-        backgroundColor: Color(softBlue),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              alignment: Alignment.center,
-              child:Text(
-                "DIAGNÓSTICO DIFERENCIAL",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Color(mainBlue),
-                  height: 5,
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                alignment: Alignment(20, 30),
+                child:Text.rich(
+                  TextSpan(
+                      text: "Bienvenido, ",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                      children: [
+                        TextSpan(
+                          text: "Usuario ",
+                          style: TextStyle(fontWeight: FontWeight.normal),
+                        )
+                      ]),
+                  style: TextStyle(fontSize:50),
                 ),
               ),
-            ),
-            Container(
-              margin: EdgeInsets.fromLTRB(0, 150, 0, 0),
-              child: Column(
+
+
+              Container(
+                margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
+
                     Container(
-                      child: RaisedButton(
-                        onPressed: (){},
-                        child:Text(
-                          "SÍNTOMAS",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
+                      child: TextField(
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.search, size: 18,),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
                           ),
+                          hintText: "Ingrese sintomas y signos",
                         ),
-                        color: Color(mainBlue),
-                      ),
-                    ),
-                    Container(
-                      child: RaisedButton(
-                        onPressed: (){},
-                        child:Text(
-                          "SIGNOS",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        color: Color(mainBlue),
                       ),
                     ),
                     Container(
@@ -77,12 +101,13 @@ class MyApp extends StatelessWidget{
                       ),
                     ),
                   ],
+                ),
               ),
-            ),
 
-          ],
-        )
+            ],
+          ),
       ),
     );
   }
-}
+
+  Text buildText() => Text("");
