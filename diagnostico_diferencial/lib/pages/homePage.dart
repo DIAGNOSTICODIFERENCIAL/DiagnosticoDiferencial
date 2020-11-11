@@ -1,11 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter/services.dart';
+import 'package:diagnostico_diferencial/pages/checkButton.dart';
+import 'dart:convert';
+import 'dart:core';
+
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
 
 
-class Home extends StatelessWidget {
+  List<String> signos = [];
+  List<String> sintomas = [];
+
+  Widget wSignos;
+  Widget wSintomas;
+
   int mainBlue = 0xff048AEC;
+
   int mainRed = 0xffED201C;
+
   int softBlue = 0xffE7F3FC;
+
   double buttonsHeight = 50;
 
   Widget build(BuildContext context) {
@@ -120,4 +139,6 @@ class Home extends StatelessWidget {
           )),
     );
   }
+
+
 }

@@ -15,4 +15,6 @@ void main() => runApp(MaterialApp(
     '/sintomas' :(context) => Sintomas(),
     '/resultado' :(context) => Resultado(),
   }
+
+
 ));
