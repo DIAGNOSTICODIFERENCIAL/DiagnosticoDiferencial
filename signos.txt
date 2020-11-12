@@ -1,34 +1,34 @@
-dolor de abdomen
-dolor de espalda
-dolor de pecho
-dolor de oído
-dolor de cabeza
-dolor de pelvis
-dolor de dientes
-dolor de recto
-dolor de piel
-no puede respirar normalmente
-no puede escuchar normalmente
-no puede ver normalmente
-no puede mover un lado
-no puede defecar
-no puede orinar
-no puede dormir
-no puede oler
-no puede tragar
-no puede saborear
-no puede sentir
-no puede hablar
-escalofríos
-fiebre
-parestesia
-aturdimiento
-presincope
-boca seca
-nausea
-desaliento
-somnolencia
-sudoración
-sed
-cansancio
-debilidad
+"dolor de abdomen",
+"dolor de espalda",
+"dolor de pecho",
+"dolor de oído",
+"dolor de cabeza",
+"dolor de pelvis",
+"dolor de dientes",
+"dolor de recto",
+"dolor de piel",
+"no puede respirar normalmente",
+"no puede escuchar normalmente",
+"no puede ver normalmente",
+"no puede mover un lado",
+"no puede defecar",
+"no puede orinar",
+"no puede dormir",
+"no puede oler",
+"no puede tragar",
+"no puede saborear",
+"no puede sentir",
+"no puede hablar",
+"escalofríos",
+"fiebre",
+"parestesia",
+"aturdimiento",
+"presincope",
+"boca seca",
+"nausea",
+"desaliento",
+"somnolencia",
+"sudoración",
+"sed",
+"cansancio",
+"debilidad",
