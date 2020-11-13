@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
 import 'package:diagnostico_diferencial/pages/checkButton.dart';
+import 'package:provider/provider.dart';
 import 'dart:convert';
 import 'dart:core';
+
+import 'MyModel.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -13,11 +16,24 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
 
 
-  List<String> signos = [];
-  List<String> sintomas = [];
 
-  Widget wSignos;
-  Widget wSintomas;
+  var platform = MethodChannel("prueba/cien");
+  String hiText = "";
+
+
+  void _hi(signos,sintomas) async {
+    String response;
+    try{
+      response = await platform.invokeMethod("main",{"signos":signos,"sintomas":sintomas});
+    } on Exception{
+      response = "Faik";
+    }
+
+    setState(() {
+      hiText = response;
+    });
+
+  }
 
   int mainBlue = 0xff048AEC;
 
@@ -28,10 +44,14 @@ class _HomeState extends State<Home> {
   double buttonsHeight = 50;
 
   Widget build(BuildContext context) {
+
+    final appState = Provider.of<AppState>(context);
+
     return MaterialApp(
       home: Scaffold(
           appBar: AppBar(
-            title: Text("Diagnóstico diferencial"),
+            //title: Text("Diagnóstico diferencial"),
+            title: Text(hiText),
             centerTitle: true,
           ),
           backgroundColor: Color(softBlue),
@@ -123,7 +143,8 @@ class _HomeState extends State<Home> {
                 height: 80,
                 child: RaisedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/resultado');
+                    _hi(appState.signos,appState.sintomas);
+                    //Navigator.pushNamed(context, '/resultado');
                   },
                   child: Text(
                     "DIAGNÓSTICO",
