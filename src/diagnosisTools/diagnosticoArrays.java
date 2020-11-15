@@ -1,23 +1,25 @@
 package src.diagnosisTools;
+import org.graalvm.compiler.graph.spi.Canonicalizable.Binary;
+
 import structures.*;
 public class diagnosticoArrays {
 
-    public doubleLinkedList<enfermedad> resultadoDiagnostico;
+    public BinaryHeap<enfermedad> resultadoDiagnostico;
 
-    public doubleLinkedList<enfermedad> getDiagnostico(){
+    public BinaryHeap<enfermedad> getDiagnostico() {
         return resultadoDiagnostico;
     }
     public void diagnostico(enfermedad enfermedadPaciente, doubleLinkedList Enfermedades){
-        resultadoDiagnostico = new doubleLinkedList<>();
+        resultadoDiagnostico = new BinaryHeap<>();
         System.out.println(Enfermedades.length());
         for(int i=0; i<Enfermedades.length();i++) {
             //análisis síntomas:
             enfermedad enfermedadX = (enfermedad)Enfermedades.getK(i);// Analizaremos enfermedad una por una
-            enfermedad enfermedadTmp = new enfermedad
-                    (enfermedadX.name,
-                    interseccionArreglos(enfermedadX.signos,enfermedadPaciente.signos)
-                    ,interseccionArreglos(enfermedadX.sintomas,enfermedadPaciente.sintomas));
-            resultadoDiagnostico.append(enfermedadTmp);
+            stringDoubleLinkedList InterseccionSignos = interseccionArreglos(enfermedadX.signos,enfermedadPaciente.signos);
+            stringDoubleLinkedList intersecciónSintomas = interseccionArreglos(enfermedadX.sintomas,enfermedadPaciente.sintomas);
+            int instersecciones = intersecciónSintomas.length()+InterseccionSignos.length();
+            enfermedad enfermedadTmp = new enfermedad(enfermedadX.name,InterseccionSignos, intersecciónSintomas, instersecciones);// se crea la enfermedad con el número de intersecciones
+            resultadoDiagnostico.insert(enfermedadTmp); // se agrega la enfermedad a la cola, donde la que tenga mayor numero de coincidencia tendra la mayor prioridad
             //los datos se reciben ordenados
         }
     }
