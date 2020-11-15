@@ -1,6 +1,6 @@
 package java;
 import java.io.*;
-import java.sql.SQLOutput;
+import java.util.ArrayList;
 
 import diagnosisTools.*;
 import structures.*;
@@ -10,14 +10,19 @@ public class dataReader {
     File file;
     BufferedReader br;
 
-    public dataReader(String path){
+
+    public dataReader(String path) {
         this.file = new File(path);
-        try{
+        try {
             this.br = new BufferedReader(new FileReader(file));
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found at "+path);
         }
-        catch (FileNotFoundException ex){
-            System.out.println("File not found in "+path);
-        }
+    }
+
+    public dataReader(){
+        this.file = null;
+        this.br = null;
     }
     public String readPlain() throws  IOException{
         int i=0;
@@ -70,6 +75,45 @@ public class dataReader {
         }
         return enfermedades;
     }
+
+    public doubleLinkedList readArrayList(ArrayList<String> data){
+        String st;
+        doubleLinkedList<enfermedad> enfermedades = new doubleLinkedList<enfermedad>();
+        enfermedad tmpEnfermedad = new enfermedad();
+        for(int i=0; i<data.size(); i++){
+            System.out.println(i+"   "+data.get(i));
+            //System.out.println(i);
+            if(i%4==0){
+                if(i!=0){
+                    tmpEnfermedad.sort();
+                    enfermedades.append(tmpEnfermedad);
+                }
+                tmpEnfermedad = new enfermedad();
+                i++;
+                continue;
+            }
+            String[] parts = data.get(i).split(":");
+            String name = parts[1];
+            String functionalPart = parts[1];
+            String[] caracteristicas = functionalPart.split(", ");
+            if(i%4==1){
+                tmpEnfermedad.setName(name);
+            }
+            if(i%4==2){
+                for(int j=0; j<caracteristicas.length;j++){
+                    tmpEnfermedad.sintomas.append(caracteristicas[j]);
+                }
+
+            }if(i%4==3){
+                for(int j=0; j<caracteristicas.length;j++){
+                    tmpEnfermedad.signos.append(caracteristicas[j]);
+                }
+            }
+        }
+        return enfermedades;
+    }
+
+
     public enfermedad readOne()throws IOException{
         int i=0;
         String st;

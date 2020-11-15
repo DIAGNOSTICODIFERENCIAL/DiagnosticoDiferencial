@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
@@ -15,16 +18,25 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
+  String _dataBasePath = "assets/muestra2.txt";
 
+  int mainBlue = 0xff048AEC;
+
+  int mainRed = 0xffED201C;
+
+  int softBlue = 0xffE7F3FC;
+
+  double buttonsHeight = 50;
 
   var platform = MethodChannel("prueba/cien");
   String hiText = "";
 
+  void _hi(signos,sintomas,database) async {
 
-  void _hi(signos,sintomas) async {
     String response;
     try{
-      response = await platform.invokeMethod("main",{"signos":signos,"sintomas":sintomas});
+      response = await platform.invokeMethod("main",{"signos":signos,"sintomas":sintomas,"database":database});
+      response="Win";
     } on Exception{
       response = "Faik";
     }
@@ -35,13 +47,6 @@ class _HomeState extends State<Home> {
 
   }
 
-  int mainBlue = 0xff048AEC;
-
-  int mainRed = 0xffED201C;
-
-  int softBlue = 0xffE7F3FC;
-
-  double buttonsHeight = 50;
 
   Widget build(BuildContext context) {
 
@@ -143,7 +148,7 @@ class _HomeState extends State<Home> {
                 height: 80,
                 child: RaisedButton(
                   onPressed: () {
-                    _hi(appState.signos,appState.sintomas);
+                    readCounter("assets/muestra2.txt",appState.signos,appState.sintomas);
                     //Navigator.pushNamed(context, '/resultado');
                   },
                   child: Text(
@@ -160,6 +165,24 @@ class _HomeState extends State<Home> {
           )),
     );
   }
+
+
+
+  Future<String> readCounter(path,signos,sintomas) async {
+    WidgetsFlutterBinding.ensureInitialized();
+    try {
+      String contents = await rootBundle.loadString(path);
+      LineSplitter ls = new LineSplitter();
+      List<String> lines = ls.convert(contents);
+      _hi(signos,sintomas,lines);
+      return("Well Done");
+    } catch (e) {
+      print(e);
+      // If encountering an error, return 0.
+      return "F";
+    }
+  }
+
 
 
 }

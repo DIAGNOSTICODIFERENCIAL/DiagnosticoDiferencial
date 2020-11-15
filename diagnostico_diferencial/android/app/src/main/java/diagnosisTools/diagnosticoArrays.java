@@ -6,27 +6,7 @@ public class diagnosticoArrays {
 
     public doubleLinkedList<enfermedad> resultadoDiagnostico;
 
-    public ArrayList<ArrayList<String>>[] matrizEnfermedades; //n filas para n enfermedades. matriz[i][0]<-names,matriz[i][1]<-signos,matriz[i][2]<-sintomas
-
-
-    public ArrayList[] getMatriz(){
-        if(resultadoDiagnostico==null){
-            System.out.println("Primero realiza el diagnostico");
-            return null;
-        }
-        int n = resultadoDiagnostico.length();
-        matrizEnfermedades = new ArrayList[n];
-        for(int i=0; i<n; i++){
-            matrizEnfermedades[i] = new ArrayList<ArrayList<String>>();
-            enfermedad enfermedadTmp = resultadoDiagnostico.getK(i);
-            matrizEnfermedades[i].add(new ArrayList<String>());
-            matrizEnfermedades[i].get(0).add(enfermedadTmp.name);
-            matrizEnfermedades[i].add(enfermedadTmp.signos.toArrayList());
-            matrizEnfermedades[i].add(enfermedadTmp.sintomas.toArrayList());
-        }
-        return matrizEnfermedades;
-    }
-
+   
 
 
     public doubleLinkedList<enfermedad> getDiagnostico(){

@@ -1,10 +1,8 @@
 package java;
 
 import androidx.annotation.NonNull;
-
 import java.io.IOException;
 import java.util.ArrayList;
-
 import io.flutter.embedding.android.FlutterActivity;
 import io.flutter.embedding.engine.FlutterEngine;
 import io.flutter.plugin.common.MethodChannel;
@@ -26,7 +24,8 @@ public class MainActivity extends FlutterActivity {
                                 try {
                                     ArrayList<String> sintomas = call.argument("sintomas");
                                     ArrayList<String> signos = call.argument("signos");
-                                    ArrayList<ArrayList<String>>[] resultado = main(sintomas,signos);
+                                    ArrayList<String> database = call.argument("database");
+                                    ArrayList<ArrayList<String>>[] resultado = main(sintomas,signos,database);
                                     result.success(resultado);
                                 } catch (IOException e) {
                                     e.printStackTrace();
@@ -35,23 +34,22 @@ public class MainActivity extends FlutterActivity {
                         }
                 );
     }
-    private ArrayList<ArrayList<String>>[] main(ArrayList<String> sintomas,ArrayList<String> signos) throws IOException {
-        //Window v1 = new Window("ventana");
-        //v1.setVisible(true);
-        dataReader dr = new dataReader("texts/muestra2.txt");
-        dataReader dr2 = new dataReader("texts/enfermedadPaciente.txt");
-        doubleLinkedList<enfermedad> enfermedades = dr.readList();
+    private ArrayList<ArrayList<String>>[] main(ArrayList<String> sintomas,ArrayList<String> signos,ArrayList<String> database) throws IOException {
+        dataReader dr = new dataReader();
+        doubleLinkedList<enfermedad> enfermedades = dr.readArrayList(database);
+        System.out.println(enfermedades.getK(1).signos.toString());
+        //enfermedad enfermedadP = dr.readOne();
         //System.out.println(enfermedades.length());
         //System.out.println(enfermedades);
         //System.out.println(enfe1);
         //enfermedad enfermedadPaciente = dr2.readOne();
-        enfermedad enfermedadPaciente = createEnfermedad(sintomas,signos);
+        /*enfermedad enfermedadPaciente = createEnfermedad(sintomas,signos);
         System.out.println(enfermedadPaciente);
         diagnosticoArrays diagnostico = new diagnosticoArrays();
         diagnostico.diagnostico(enfermedadPaciente,enfermedades);
         diagnostico.resultadoDiagnostico.sort();
-        ArrayList<ArrayList<String>>[] matrizResultado = diagnostico.getMatriz();
-        return matrizResultado;
+        ArrayList<ArrayList<String>>[] matrizResultado = diagnostico.getMatriz();*/
+        return null;
         //BinaryHeap monti = new BinaryHeap();
     }
 
