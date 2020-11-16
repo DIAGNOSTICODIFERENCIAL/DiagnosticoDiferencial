@@ -27,10 +27,10 @@ public class BinaryHeap<Anytipe extends Comparable<? super Anytipe>> {
             resize(2);
 
         // Percolate up
-        int hole = ++Size;
-        for (arr[0] = x; x.compareTo(arr[hole / 2]) < 0; hole /= 2)
-
+        int hole = Size++;
+        for (arr[0] = x; x.compareTo(arr[hole / 2]) < 0; hole /= 2){
             arr[hole] = arr[hole / 2];
+        }
         arr[hole] = x;
     }
 

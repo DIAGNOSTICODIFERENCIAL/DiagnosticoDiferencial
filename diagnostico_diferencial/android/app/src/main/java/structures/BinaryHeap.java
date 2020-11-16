@@ -29,7 +29,8 @@ public class BinaryHeap<Anytipe extends Comparable<? super Anytipe>> {
             resize(2);
 
         // Percolate up
-        int hole = ++Size;
+        //int hole = ++Size;
+        int hole = Size++;
         for (arr[0] = x; x.compareTo(arr[hole / 2]) < 0; hole /= 2)
 
             arr[hole] = arr[hole / 2];
@@ -66,10 +67,11 @@ public class BinaryHeap<Anytipe extends Comparable<? super Anytipe>> {
         return minItem;
     }
 
-    private void percolateDown(int hole) {
+    private void percolateDown(int startNode) {
         int child;
-        Anytipe tmp = arr[hole];
-        for (; hole * 2 <= Size; hole = child) {
+        Anytipe tmp = arr[startNode];
+        int hole;
+        for (hole = startNode; hole * 2 <= Size; hole = child ) {
             child = hole * 2;
             if (child != Size && arr[child + 1].compareTo(arr[child]) < 0)
                 child++;

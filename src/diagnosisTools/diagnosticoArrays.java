@@ -1,5 +1,4 @@
 package src.diagnosisTools;
-import org.graalvm.compiler.graph.spi.Canonicalizable.Binary;
 
 import structures.*;
 public class diagnosticoArrays {

@@ -188,9 +188,6 @@ class _HomeState extends State<Home> {
       String contents = await rootBundle.loadString(path);
       LineSplitter ls = new LineSplitter();
       List<String> lines = ls.convert(contents);
-      print("-------------------------------LINES------------------------------------");
-      print(lines);
-      print("-------------------------------LINES------------------------------------");
       //_hi(signos,sintomas,lines);
       List response;
       try{
@@ -202,6 +199,7 @@ class _HomeState extends State<Home> {
           hiText = "Success!";
         });
       } on Exception{
+        print(Exception);
         setState(() {
           hiText = "Failed";
         });

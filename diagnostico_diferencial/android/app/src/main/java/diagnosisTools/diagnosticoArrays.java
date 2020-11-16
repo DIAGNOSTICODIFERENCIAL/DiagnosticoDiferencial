@@ -17,7 +17,7 @@ public class diagnosticoArrays {
         System.out.println(Enfermedades.length());
         for(int i=0; i<Enfermedades.length();i++) {
             //análisis síntomas:
-            enfermedad enfermedadX = Enfermedades.getK(i);// Analizaremos enfermedad una por una
+            enfermedad enfermedadX = (enfermedad)Enfermedades.getK(i);// Analizaremos enfermedad una por una
             System.out.println("enfermedad x= "+enfermedadX);
             stringDoubleLinkedList InterseccionSignos = interseccionArreglos(enfermedadX.signos,enfermedadPaciente.signos);
             stringDoubleLinkedList intersecciónSintomas = interseccionArreglos(enfermedadX.sintomas,enfermedadPaciente.sintomas);
@@ -42,23 +42,39 @@ public class diagnosticoArrays {
         int j = 0;//Apunta a enfermedadX
         stringDoubleLinkedList commonItems = new stringDoubleLinkedList();
         //for(int idx=0; idx<n; idx++){
-        while(i<lenghtEnfermedadPaciente && j<lenghtEnfermedad){
-            //if(i<lenghtEnfermedad && i<lenghtEnfermedadPaciente){
-                System.out.println("iii "+caracteristicaEnfermedadPaciente.getK(i));
-                String caracteristicaEnfermedadPacienteTmp = caracteristicaEnfermedadPaciente.getK(i);
-                String caracteristicaEnfermedadXTmp = caracteristicaEnfermedadX.getK(j);
-                if(caracteristicaEnfermedadPacienteTmp.equals(caracteristicaEnfermedadXTmp)){
+        //while(i<lenghtEnfermedadPaciente && j<lenghtEnfermedad){
+        //    //if(i<lenghtEnfermedad && i<lenghtEnfermedadPaciente){
+        //        System.out.println("iii "+caracteristicaEnfermedadPaciente.getK(i));
+        //        String caracteristicaEnfermedadPacienteTmp = caracteristicaEnfermedadPaciente.getK(i);
+        //        String caracteristicaEnfermedadXTmp = caracteristicaEnfermedadX.getK(j);
+        //        if(caracteristicaEnfermedadPacienteTmp.equals(caracteristicaEnfermedadXTmp)){
+        //            //Crear objeto respuesta
+        //            commonItems.append(caracteristicaEnfermedadPaciente.getK(i));
+        //            i++;j++;
+        //        }
+        //        else if(caracteristicaEnfermedadPacienteTmp.compareTo(caracteristicaEnfermedadXTmp)<0){
+        //            i++;
+        //        }
+        //        else{
+        //            j++;
+        //        }
+        //    //}
+        //}
+        //return commonItems;
+        for(int idx=0; idx<n; idx++){
+            if(i<lenghtEnfermedad && i<lenghtEnfermedadPaciente){
+                if(caracteristicaEnfermedadPaciente.getK(i).equals(caracteristicaEnfermedadX.getK(j))){
                     //Crear objeto respuesta
                     commonItems.append(caracteristicaEnfermedadPaciente.getK(i));
                     i++;j++;
                 }
-                else if(caracteristicaEnfermedadPacienteTmp.compareTo(caracteristicaEnfermedadXTmp)<0){
+                else if(caracteristicaEnfermedadPaciente.getK(i).compareTo(caracteristicaEnfermedadX.getK(j))<0){
                     i++;
                 }
                 else{
                     j++;
                 }
-            //}
+            }
         }
         return commonItems;
     }

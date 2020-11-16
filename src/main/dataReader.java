@@ -50,6 +50,7 @@ public class dataReader {
                 continue;
             }
             String[] parts = st.split(":");
+            System.out.println(st);
             String name = parts[1];
             String functionalPart = parts[1];
             String[] caracteristicas = functionalPart.split(", ");
