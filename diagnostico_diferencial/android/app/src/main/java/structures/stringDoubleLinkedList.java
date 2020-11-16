@@ -2,6 +2,7 @@ package structures;
 
 import java.util.ArrayList;
 
+
 public class stringDoubleLinkedList {
     stringDoubleNode head;
     stringDoubleNode tail;
@@ -23,21 +24,6 @@ public class stringDoubleLinkedList {
 
 
 
-    public ArrayList<String> toArrayList(){
-        if(head==null){
-            System.out.println("lista vacía metodo toArrayList");
-            return null;
-        }
-        ArrayList<String> newArray = new ArrayList<String>();
-        stringDoubleNode tmpHead = head;
-        while(tmpHead!=null){
-            newArray.add(tmpHead.data);
-            tmpHead = tmpHead.next;
-        }
-        return newArray;
-    }
-
-
 
     public stringDoubleLinkedList(String data){
         this.length = 1;
@@ -48,11 +34,19 @@ public class stringDoubleLinkedList {
     public stringDoubleLinkedList(ArrayList<String> data){
         this.length = data.size();
         this.head = new stringDoubleNode(data.get(0));
+        System.out.println("cabezaaa "+head.data);
         stringDoubleNode tmp = head;
         for(int i=1; i<data.size(); i++){
-            tmp.next = new stringDoubleNode(data.get(i));
+            tmp.next = new stringDoubleNode(data.get(i),tmp);
             tmp = tmp.next;
         }
+        if(data.size()!=1){
+            if(data.size()==2){{
+                this.tail = tmp.prev;
+            }}
+            this.tail = tmp.prev.prev;
+        }
+        else {this.tail = this.head;}
     }
 
     public void append(String data){
@@ -79,6 +73,7 @@ public class stringDoubleLinkedList {
             return (String) this.head.data;
         }
         else if(index==length-1){
+            System.out.println("indeeeex "+index);
             return (String) this.tail.data;
         }
         else{
@@ -175,6 +170,8 @@ public class stringDoubleLinkedList {
         }
         System.out.println();
     }
+
+    @Override
     public String toString(){
         String ans = "";
         stringDoubleNode tmp = head;
@@ -248,4 +245,16 @@ public class stringDoubleLinkedList {
         }
         return slow;
     }
+
+    public ArrayList<String> toArrayList(){
+        ArrayList<String> ans = new ArrayList<String>();
+        stringDoubleNode tmp = head;
+        if(length==0){ System.out.println("EmptyList");return null;};
+        for(int i=0; i<length;i++){
+            ans.add(tmp.data);
+            tmp = tmp.next;
+        }
+        return ans;
+    }
+
 }

@@ -1,28 +1,28 @@
 package diagnosisTools;
-import java.util.ArrayList;
+
+//import org.graalvm.compiler.graph.spi.Canonicalizable.Binary;
 
 import structures.*;
 public class diagnosticoArrays {
 
-    public doubleLinkedList<enfermedad> resultadoDiagnostico;
+    public BinaryHeap<enfermedad> resultadoDiagnostico;
 
-   
-
-
-    public doubleLinkedList<enfermedad> getDiagnostico(){
+    public BinaryHeap<enfermedad> getDiagnostico() {
         return resultadoDiagnostico;
     }
-    public void diagnostico(enfermedad enfermedadPaciente, doubleLinkedList Enfermedades){
-        resultadoDiagnostico = new doubleLinkedList<>();
+    public void diagnosticar(enfermedad enfermedadPaciente, doubleLinkedList<enfermedad> Enfermedades){
+        resultadoDiagnostico = new BinaryHeap<>();
         System.out.println(Enfermedades.length());
         for(int i=0; i<Enfermedades.length();i++) {
             //análisis síntomas:
-            enfermedad enfermedadX = (enfermedad)Enfermedades.getK(i);// Analizaremos enfermedad una por una
-            enfermedad enfermedadTmp = new enfermedad
-                    (enfermedadX.name,
-                    interseccionArreglos(enfermedadX.signos,enfermedadPaciente.signos)
-                    ,interseccionArreglos(enfermedadX.sintomas,enfermedadPaciente.sintomas));
-            resultadoDiagnostico.append(enfermedadTmp);
+            enfermedad enfermedadX = Enfermedades.getK(i);// Analizaremos enfermedad una por una
+            System.out.println("enfermedad x= "+enfermedadX);
+            stringDoubleLinkedList InterseccionSignos = interseccionArreglos(enfermedadX.signos,enfermedadPaciente.signos);
+            stringDoubleLinkedList intersecciónSintomas = interseccionArreglos(enfermedadX.sintomas,enfermedadPaciente.sintomas);
+            int instersecciones = intersecciónSintomas.length()+InterseccionSignos.length();
+            enfermedad enfermedadTmp = new enfermedad(enfermedadX.name,InterseccionSignos, intersecciónSintomas, instersecciones);// se crea la enfermedad con el número de intersecciones
+            System.out.println("enfermedad temporal "+enfermedadTmp.sintomas);
+            resultadoDiagnostico.insert(enfermedadTmp); // se agrega la enfermedad a la cola, donde la que tenga mayor numero de coincidencia tendra la mayor prioridad
             //los datos se reciben ordenados
         }
     }
@@ -39,20 +39,24 @@ public class diagnosticoArrays {
         int i=0;//Apunta a enfermedadPaciente;
         int j = 0;//Apunta a enfermedadX
         stringDoubleLinkedList commonItems = new stringDoubleLinkedList();
-        for(int idx=0; idx<n; idx++){
-            if(i<lenghtEnfermedad && i<lenghtEnfermedadPaciente){
-                if(caracteristicaEnfermedadPaciente.getK(i).equals(caracteristicaEnfermedadX.getK(j))){
+        //for(int idx=0; idx<n; idx++){
+        while(i<lenghtEnfermedadPaciente && j<lenghtEnfermedad){
+            //if(i<lenghtEnfermedad && i<lenghtEnfermedadPaciente){
+                System.out.println("iii "+caracteristicaEnfermedadPaciente.getK(i));
+                String caracteristicaEnfermedadPacienteTmp = caracteristicaEnfermedadPaciente.getK(i);
+                String caracteristicaEnfermedadXTmp = caracteristicaEnfermedadX.getK(j);
+                if(caracteristicaEnfermedadPacienteTmp.equals(caracteristicaEnfermedadXTmp)){
                     //Crear objeto respuesta
                     commonItems.append(caracteristicaEnfermedadPaciente.getK(i));
                     i++;j++;
                 }
-                else if(caracteristicaEnfermedadPaciente.getK(i).compareTo(caracteristicaEnfermedadX.getK(j))<0){
+                else if(caracteristicaEnfermedadPacienteTmp.compareTo(caracteristicaEnfermedadXTmp)<0){
                     i++;
                 }
                 else{
                     j++;
                 }
-            }
+            //}
         }
         return commonItems;
     }

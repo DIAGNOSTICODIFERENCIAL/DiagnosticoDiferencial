@@ -14,21 +14,21 @@ linea nigra
 rectorragia
 exantema
 emesis
-Gingivorragia
-Gliosis
-Goma granulomatosa
-Gránulos de Schüffner
-Hematemesis
-Hematocele
-Hematoma
-Hematuria
-Hemoptisis
-Hemorragia
-Hemorragia digestiva baja
-Hemorragia gastrointestinal
-Hepatomegalia
-Hinchazón
-Hinchazón abdominal
-Hiperfosfatemia
-Hiperglucemia
-Hipertelorismo
+gingivorragia
+gliosis
+goma granulomatosa
+gránulos de schüffner
+hematemesis
+hematocele
+hematoma
+hematuria
+hemoptisis
+hemorragia
+hemorragia digestiva baja
+hemorragia gastrointestinal
+hepatomegalia
+hinchazón
+hinchazón abdominal
+hiperfosfatemia
+hiperglucemia
+hipertelorismo

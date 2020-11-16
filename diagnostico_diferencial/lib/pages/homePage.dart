@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:diagnostico_diferencial/pages/resultadoDiagnostico.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -28,22 +29,28 @@ class _HomeState extends State<Home> {
 
   double buttonsHeight = 50;
 
+  List resultado;
+
   var platform = MethodChannel("prueba/cien");
   String hiText = "";
 
   void _hi(signos,sintomas,database) async {
 
-    String response;
+    List response;
     try{
       response = await platform.invokeMethod("main",{"signos":signos,"sintomas":sintomas,"database":database});
-      response="Win";
+      print("RESPONSEEEE");
+      print(response);
+      setState(() {
+        resultado = response;
+        hiText = "Success!";
+      });
     } on Exception{
-      response = "Faik";
+      setState(() {
+        hiText = "Failed";
+      });
     }
 
-    setState(() {
-      hiText = response;
-    });
 
   }
 
@@ -149,7 +156,7 @@ class _HomeState extends State<Home> {
                 child: RaisedButton(
                   onPressed: () {
                     readCounter("assets/muestra2.txt",appState.signos,appState.sintomas);
-                    //Navigator.pushNamed(context, '/resultado');
+
                   },
                   child: Text(
                     "DIAGNÓSTICO",
@@ -174,7 +181,25 @@ class _HomeState extends State<Home> {
       String contents = await rootBundle.loadString(path);
       LineSplitter ls = new LineSplitter();
       List<String> lines = ls.convert(contents);
-      _hi(signos,sintomas,lines);
+      //_hi(signos,sintomas,lines);
+      List response;
+      try{
+        response = await platform.invokeMethod("main",{"signos":signos,"sintomas":sintomas,"database":lines});
+        print("RESPONSEEEE");
+        print(response);
+        setState(() {
+          resultado = response;
+          hiText = "Success!";
+        });
+      } on Exception{
+        setState(() {
+          hiText = "Failed";
+        });
+      }
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => Resultado(resultado)),
+      );
       return("Well Done");
     } catch (e) {
       print(e);

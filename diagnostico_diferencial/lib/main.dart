@@ -17,7 +17,7 @@ void main() => runApp(ChangeNotifierProvider(
       "/": (context) => Home(),
       '/signos' :(context) => Signos(),
       '/sintomas' :(context) => Sintomas(),
-      '/resultado' :(context) => Resultado(),
+      //'/resultado' :(context) => Resultado(),
     }
   
   

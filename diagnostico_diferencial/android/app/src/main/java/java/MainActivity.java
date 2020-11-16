@@ -25,7 +25,8 @@ public class MainActivity extends FlutterActivity {
                                     ArrayList<String> sintomas = call.argument("sintomas");
                                     ArrayList<String> signos = call.argument("signos");
                                     ArrayList<String> database = call.argument("database");
-                                    ArrayList<ArrayList<String>>[] resultado = main(sintomas,signos,database);
+                                    ArrayList resultado = main(sintomas,signos,database);
+                                    System.out.println("resultaaaado "+resultado);
                                     result.success(resultado);
                                 } catch (IOException e) {
                                     e.printStackTrace();
@@ -34,22 +35,14 @@ public class MainActivity extends FlutterActivity {
                         }
                 );
     }
-    private ArrayList<ArrayList<String>>[] main(ArrayList<String> sintomas,ArrayList<String> signos,ArrayList<String> database) throws IOException {
+    private ArrayList main(ArrayList<String> sintomas,ArrayList<String> signos,ArrayList<String> database) throws IOException {
         dataReader dr = new dataReader();
         doubleLinkedList<enfermedad> enfermedades = dr.readArrayList(database);
-        System.out.println(enfermedades.getK(1).signos.toString());
-        //enfermedad enfermedadP = dr.readOne();
-        //System.out.println(enfermedades.length());
-        //System.out.println(enfermedades);
-        //System.out.println(enfe1);
-        //enfermedad enfermedadPaciente = dr2.readOne();
-        /*enfermedad enfermedadPaciente = createEnfermedad(sintomas,signos);
-        System.out.println(enfermedadPaciente);
+        enfermedad enfermedadPaciente = createEnfermedad(sintomas,signos);
         diagnosticoArrays diagnostico = new diagnosticoArrays();
-        diagnostico.diagnostico(enfermedadPaciente,enfermedades);
-        diagnostico.resultadoDiagnostico.sort();
-        ArrayList<ArrayList<String>>[] matrizResultado = diagnostico.getMatriz();*/
-        return null;
+        diagnostico.diagnosticar(enfermedadPaciente,enfermedades);
+        ArrayList arrayListResultadoDiagnostico = diagnostico.getDiagnostico().toArrayList();
+        return arrayListResultadoDiagnostico;
         //BinaryHeap monti = new BinaryHeap();
     }
 
@@ -58,6 +51,9 @@ public class MainActivity extends FlutterActivity {
         enfermedadP.name = "Desconocida";
         enfermedadP.signos = new stringDoubleLinkedList(signos);
         enfermedadP.sintomas = new stringDoubleLinkedList(sintomas);
+        System.out.println("Se creaaaaa pacienteeee sin ordenar"+enfermedadP);
+        enfermedadP.sort();
+        System.out.println("Se creaaaaa pacienteeee"+enfermedadP);
         return enfermedadP;
     }
 

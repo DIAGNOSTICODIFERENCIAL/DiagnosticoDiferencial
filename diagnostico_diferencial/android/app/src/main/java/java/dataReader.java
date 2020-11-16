@@ -81,15 +81,15 @@ public class dataReader {
         doubleLinkedList<enfermedad> enfermedades = new doubleLinkedList<enfermedad>();
         enfermedad tmpEnfermedad = new enfermedad();
         for(int i=0; i<data.size(); i++){
-            System.out.println(i+"   "+data.get(i));
+//            System.out.println(i+"   "+data.get(i));
             //System.out.println(i);
             if(i%4==0){
                 if(i!=0){
                     tmpEnfermedad.sort();
+                    System.out.println("Se creaaaaa tmpEnfermedad "+tmpEnfermedad);
                     enfermedades.append(tmpEnfermedad);
                 }
                 tmpEnfermedad = new enfermedad();
-                i++;
                 continue;
             }
             String[] parts = data.get(i).split(":");
