@@ -33,7 +33,7 @@ from random import randint
 condiciones_usadas = set()
 nombres_usados = set()
 f= open("muestra.txt","w+")
-for i in range(200000):
+for i in range(100):
   longitud_nombre = randint(3,50)
   nombre = []
   longitud_sintoma = randint(3,len(sintomas)-1)

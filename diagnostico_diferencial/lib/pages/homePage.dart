@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:diagnostico_diferencial/pages/resultadoDiagnostico.dart';
+import 'package:diagnostico_diferencial/pages/historial.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -19,7 +20,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
-  String _dataBasePath = "assets/muestra2.txt";
+  String _dataBasePath = "assets/muestra.txt";
 
   int mainBlue = 0xff048AEC;
 
@@ -87,6 +88,12 @@ class _HomeState extends State<Home> {
                 ListTile(
                   leading: Icon(Icons.pending_actions_rounded),
                   title: Text("Historial de diagnosticos"),
+                  onTap: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Historial(resultado)),
+                    );
+                  },
                 ),
               ],
             ),
@@ -155,7 +162,7 @@ class _HomeState extends State<Home> {
                 height: 80,
                 child: RaisedButton(
                   onPressed: () {
-                    readCounter("assets/muestra2.txt",appState.signos,appState.sintomas);
+                    readCounter(_dataBasePath,appState.signos,appState.sintomas);
 
                   },
                   child: Text(
@@ -181,6 +188,9 @@ class _HomeState extends State<Home> {
       String contents = await rootBundle.loadString(path);
       LineSplitter ls = new LineSplitter();
       List<String> lines = ls.convert(contents);
+      print("-------------------------------LINES------------------------------------");
+      print(lines);
+      print("-------------------------------LINES------------------------------------");
       //_hi(signos,sintomas,lines);
       List response;
       try{

@@ -1,4 +1,6 @@
 package java;
+import java.util.ArrayList;
+
 import structures.*;
 
 public class history {
@@ -13,5 +15,10 @@ public class history {
         historial.insert(lista);
         size++;
     }
+    
 
+    public ArrayList toArrayList(){
+        return this.historial.toArrayList();
+    }
+    
 }

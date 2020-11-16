@@ -86,8 +86,8 @@ public class dataReader {
             if(i%4==0){
                 if(i!=0){
                     tmpEnfermedad.sort();
-                    System.out.println("Se creaaaaa tmpEnfermedad "+tmpEnfermedad);
                     enfermedades.append(tmpEnfermedad);
+                    System.out.println("Se creaaaaa tmpEnfermedad "+tmpEnfermedad);
                 }
                 tmpEnfermedad = new enfermedad();
                 continue;

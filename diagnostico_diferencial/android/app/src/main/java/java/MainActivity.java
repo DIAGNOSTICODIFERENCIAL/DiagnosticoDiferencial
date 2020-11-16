@@ -12,6 +12,7 @@ import structures.*;
 
 public class MainActivity extends FlutterActivity {
     private static final String CHANNEL = "prueba/cien";
+    history historial = new history();
     @Override
     public void configureFlutterEngine(@NonNull FlutterEngine flutterEngine) {
         GeneratedPluginRegistrant.registerWith(flutterEngine);
@@ -42,6 +43,7 @@ public class MainActivity extends FlutterActivity {
         diagnosticoArrays diagnostico = new diagnosticoArrays();
         diagnostico.diagnosticar(enfermedadPaciente,enfermedades);
         ArrayList arrayListResultadoDiagnostico = diagnostico.getDiagnostico().toArrayList();
+        //arrayListResultadoDiagnostico.add(historial.toArrayList());
         return arrayListResultadoDiagnostico;
         //BinaryHeap monti = new BinaryHeap();
     }
@@ -51,9 +53,10 @@ public class MainActivity extends FlutterActivity {
         enfermedadP.name = "Desconocida";
         enfermedadP.signos = new stringDoubleLinkedList(signos);
         enfermedadP.sintomas = new stringDoubleLinkedList(sintomas);
-        System.out.println("Se creaaaaa pacienteeee sin ordenar"+enfermedadP);
+        //System.out.println("Se creaaaaa pacienteeee sin ordenar"+enfermedadP);
         enfermedadP.sort();
-        System.out.println("Se creaaaaa pacienteeee"+enfermedadP);
+        historial.addSearch(enfermedadP.toString());
+        //System.out.println("Se creaaaaa pacienteeee"+enfermedadP);
         return enfermedadP;
     }
 

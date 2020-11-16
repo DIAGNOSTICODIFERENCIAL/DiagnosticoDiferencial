@@ -1,7 +1,7 @@
 package structures;
 import java.util.ArrayList;
 
-import diagnosisTools.enfermedad;
+import diagnosisTools.*;
 
 public class BinaryHeap<Anytipe extends Comparable<? super Anytipe>> {
 

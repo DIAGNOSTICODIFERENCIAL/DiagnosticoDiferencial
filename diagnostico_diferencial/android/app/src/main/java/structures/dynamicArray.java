@@ -1,5 +1,9 @@
 package structures;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import diagnosisTools.*;
+
 public class dynamicArray {
     private Object[] array;
     private int size;
@@ -87,5 +91,13 @@ public class dynamicArray {
         return content;
     }
 
+    public ArrayList toArrayList(){
+        ArrayList arrayListAns = new ArrayList();
+        for(int i=0; i<this.size;i++){
+            //this.array[i] es una enferemdad.toString()
+            arrayListAns.add(this.array[i]);
+        }
+        return arrayListAns;
+    }
 
 }

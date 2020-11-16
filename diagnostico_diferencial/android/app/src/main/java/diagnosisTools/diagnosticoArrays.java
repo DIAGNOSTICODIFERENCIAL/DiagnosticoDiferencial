@@ -10,6 +10,8 @@ public class diagnosticoArrays {
     public BinaryHeap<enfermedad> getDiagnostico() {
         return resultadoDiagnostico;
     }
+
+
     public void diagnosticar(enfermedad enfermedadPaciente, doubleLinkedList<enfermedad> Enfermedades){
         resultadoDiagnostico = new BinaryHeap<>();
         System.out.println(Enfermedades.length());
@@ -22,7 +24,7 @@ public class diagnosticoArrays {
             int instersecciones = intersecciónSintomas.length()+InterseccionSignos.length();
             enfermedad enfermedadTmp = new enfermedad(enfermedadX.name,InterseccionSignos, intersecciónSintomas, instersecciones);// se crea la enfermedad con el número de intersecciones
             System.out.println("enfermedad temporal "+enfermedadTmp.sintomas);
-            resultadoDiagnostico.insert(enfermedadTmp); // se agrega la enfermedad a la cola, donde la que tenga mayor numero de coincidencia tendra la mayor prioridad
+            if(enfermedadTmp!=null)resultadoDiagnostico.insert(enfermedadTmp); // se agrega la enfermedad a la cola, donde la que tenga mayor numero de coincidencia tendra la mayor prioridad
             //los datos se reciben ordenados
         }
     }
