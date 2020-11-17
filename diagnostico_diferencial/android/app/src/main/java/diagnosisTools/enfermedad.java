@@ -27,7 +27,7 @@ public class enfermedad implements Comparable <enfermedad> {
     }
     public String toString(){
         String ans = "";
-        ans = "Enfermedad: "+this.name+ "\n Sintomas: "+sintomas.toString()+"Signos: "+signos.toString();
+        ans = "Enfermedad: "+this.name+ "\n Sintomas: "+sintomas.toString()+" Signos: "+signos.toString();
         return ans;
     }
     public void sort(){
@@ -43,14 +43,13 @@ public class enfermedad implements Comparable <enfermedad> {
 
     @Override
     public int compareTo(enfermedad o) {
-        System.out.println(o);
-            if (count < o.getcount()){
-                return 1;
-            } else if (count > o.getcount()) {
-                return -1;
-            } else {
-                return 0;
-            }
+        if (count < o.getcount()){
+            return 1;
+        } else if (count > o.getcount()) {
+            return -1;
+        } else {
+            return 0;
+        }
     }
 
     public ArrayList toArrayList(){
@@ -62,4 +61,5 @@ public class enfermedad implements Comparable <enfermedad> {
         arrayListEnfermedad.add(signos.toArrayList());
         return arrayListEnfermedad;
     }
+
 }

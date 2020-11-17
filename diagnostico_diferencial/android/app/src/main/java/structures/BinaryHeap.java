@@ -1,7 +1,7 @@
 package structures;
 import java.util.ArrayList;
 
-import diagnosisTools.*;
+import diagnosisTools.enfermedad;
 
 public class BinaryHeap<Anytipe extends Comparable<? super Anytipe>> {
 
@@ -29,11 +29,10 @@ public class BinaryHeap<Anytipe extends Comparable<? super Anytipe>> {
             resize(2);
 
         // Percolate up
-        //int hole = ++Size;
         int hole = Size++;
-        for (arr[0] = x; x.compareTo(arr[hole / 2]) < 0; hole /= 2)
-
+        for (arr[0] = x; x.compareTo(arr[hole / 2]) < 0; hole /= 2){
             arr[hole] = arr[hole / 2];
+        }
         arr[hole] = x;
     }
 
@@ -67,11 +66,10 @@ public class BinaryHeap<Anytipe extends Comparable<? super Anytipe>> {
         return minItem;
     }
 
-    private void percolateDown(int startNode) {
+    private void percolateDown(int hole) {
         int child;
-        Anytipe tmp = arr[startNode];
-        int hole;
-        for (hole = startNode; hole * 2 <= Size; hole = child ) {
+        Anytipe tmp = arr[hole];
+        for (; hole * 2 <= Size; hole = child) {
             child = hole * 2;
             if (child != Size && arr[child + 1].compareTo(arr[child]) < 0)
                 child++;
@@ -84,14 +82,14 @@ public class BinaryHeap<Anytipe extends Comparable<? super Anytipe>> {
         arr[hole] = tmp;
     }
 
-
     public ArrayList toArrayList(){
         ArrayList lista = new ArrayList<>();
-        while(!isEmpty()){
+        while(Size>1){
             enfermedad tempEnf = (enfermedad) deleteMin();
             lista.add(tempEnf.toArrayList());
         }
         return lista;
     }
-
 }
+
+

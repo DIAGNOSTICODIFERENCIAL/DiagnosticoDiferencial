@@ -41,7 +41,7 @@ public class MainActivity extends FlutterActivity {
         doubleLinkedList<enfermedad> enfermedades = dr.readArrayList(database);
         enfermedad enfermedadPaciente = createEnfermedad(sintomas,signos);
         diagnosticoArrays diagnostico = new diagnosticoArrays();
-        diagnostico.diagnosticar(enfermedadPaciente,enfermedades);
+        diagnostico.diagnostico(enfermedadPaciente,enfermedades);
         ArrayList arrayListResultadoDiagnostico = diagnostico.getDiagnostico().toArrayList();
         //arrayListResultadoDiagnostico.add(historial.toArrayList());
         return arrayListResultadoDiagnostico;
