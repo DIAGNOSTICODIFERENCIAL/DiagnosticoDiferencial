@@ -6,6 +6,7 @@ import java.io.IOException;
 
 public class main {
     public static void main(String[] args) throws IOException {
+
         dataReader dr = new dataReader("muestra.txt");
         dataReader dr2 = new dataReader("enfermedadPaciente.txt");
         doubleLinkedList<enfermedad> enfermedades = dr.readList();
@@ -16,5 +17,6 @@ public class main {
         diagnosticoArrays diagnostico = new diagnosticoArrays();
         diagnostico.diagnostico(enfermedadPaciente,enfermedades);
         BinaryHeap<enfermedad> resultado = diagnostico.getDiagnostico();
+
     }
 }

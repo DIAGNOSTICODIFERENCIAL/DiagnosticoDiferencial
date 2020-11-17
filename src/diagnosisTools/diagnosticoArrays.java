@@ -11,6 +11,7 @@ public class diagnosticoArrays {
     public void diagnostico(enfermedad enfermedadPaciente, doubleLinkedList Enfermedades){
         resultadoDiagnostico = new BinaryHeap<>();
         System.out.println(Enfermedades.length());
+        long startTime = System.nanoTime();
         for(int i=0; i<Enfermedades.length();i++) {
             //análisis síntomas:
             enfermedad enfermedadX = (enfermedad)Enfermedades.getK(i);// Analizaremos enfermedad una por una
@@ -21,6 +22,8 @@ public class diagnosticoArrays {
             resultadoDiagnostico.insert(enfermedadTmp); // se agrega la enfermedad a la cola, donde la que tenga mayor numero de coincidencia tendra la mayor prioridad
             //los datos se reciben ordenados
         }
+        long endTime = System.nanoTime() - startTime;
+        System.out.println(endTime); 
     }
 
     /*Metodo que recibe sintomas o signos de las enfermedades a comparar y encuentra la intersección entre las listas.
