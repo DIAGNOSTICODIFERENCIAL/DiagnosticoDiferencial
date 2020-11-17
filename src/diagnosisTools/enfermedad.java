@@ -1,6 +1,8 @@
 package src.diagnosisTools;
 import structures.*;
 
+import java.util.ArrayList;
+
 public class enfermedad implements Comparable <enfermedad> {
     public stringDoubleLinkedList signos;
     public stringDoubleLinkedList sintomas;
@@ -48,5 +50,15 @@ public class enfermedad implements Comparable <enfermedad> {
         } else {
             return 0;
         }
+    }
+
+    public ArrayList toArrayList(){
+        ArrayList arrayListEnfermedad = new ArrayList();
+        ArrayList<String> arrayListName = new ArrayList<String>();
+        arrayListName.add(name);
+        arrayListEnfermedad.add(arrayListName);
+        arrayListEnfermedad.add(sintomas.toArrayList());
+        arrayListEnfermedad.add(signos.toArrayList());
+        return arrayListEnfermedad;
     }
 }

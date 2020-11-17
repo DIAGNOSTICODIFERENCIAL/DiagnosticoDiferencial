@@ -32,9 +32,9 @@ Nombres = list(string.ascii_lowercase)
 from random import randint
 condiciones_usadas = set()
 nombres_usados = set()
-f= open("muestra.txt","w+")
+f= open("muestra1k.txt","w+")
 f.write('\n')
-for i in range(10000):
+for i in range(100000):
   longitud_nombre = randint(3,50)
   nombre = []
   longitud_sintoma = randint(3,len(sintomas)-1)

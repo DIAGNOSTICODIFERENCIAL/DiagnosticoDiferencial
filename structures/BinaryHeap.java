@@ -1,6 +1,8 @@
 package structures;
 import src.diagnosisTools.enfermedad;
 
+import java.util.ArrayList;
+
 public class BinaryHeap<Anytipe extends Comparable<? super Anytipe>> {
 
     private int capacity;
@@ -71,6 +73,7 @@ public class BinaryHeap<Anytipe extends Comparable<? super Anytipe>> {
             child = hole * 2;
             if (child != Size && arr[child + 1].compareTo(arr[child]) < 0)
                 child++;
+            System.out.println("aaaaa  "+arr[child]);
             if (arr[child].compareTo(tmp) < 0)
                 arr[hole] = arr[child];
             else
@@ -78,6 +81,19 @@ public class BinaryHeap<Anytipe extends Comparable<? super Anytipe>> {
 
         }
         arr[hole] = tmp;
+    }
+
+    public ArrayList toArrayList(){
+        ArrayList lista = new ArrayList<>();
+        int i = 0;
+        System.out.println("adasdasdsadasdasdadadasdasdasdsadsadasdasdasd");
+        deleteMin();
+        System.out.println("sdasdasda");
+        while(!isEmpty() && i<5){
+            enfermedad tempEnf = (enfermedad) deleteMin();
+            lista.add(tempEnf.toArrayList());
+        }
+        return lista;
     }
 
 }

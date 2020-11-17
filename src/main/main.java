@@ -3,6 +3,7 @@ import src.diagnosisTools.*;
 import structures.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class main {
     public static void main(String[] args) throws IOException {
@@ -16,7 +17,9 @@ public class main {
         enfermedad enfermedadPaciente = dr2.readOne();
         diagnosticoArrays diagnostico = new diagnosticoArrays();
         diagnostico.diagnostico(enfermedadPaciente,enfermedades);
-        BinaryHeap<enfermedad> resultado = diagnostico.getDiagnostico();
-
+        //BinaryHeap<enfermedad> resultado = diagnostico.getDiagnostico();
+        PQueue resultado = diagnostico.getDiagnostico2();
+        ArrayList a = resultado.toArrayList();
+        System.out.println(a);
     }
 }

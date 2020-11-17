@@ -1,15 +1,24 @@
 package src.diagnosisTools;
 
 import structures.*;
+
+import java.util.Queue;
+
 public class diagnosticoArrays {
 
     public BinaryHeap<enfermedad> resultadoDiagnostico;
+    public PQueue resultadoDiagnostico2;
 
     public BinaryHeap<enfermedad> getDiagnostico() {
         return resultadoDiagnostico;
     }
+    public PQueue getDiagnostico2() {
+        return resultadoDiagnostico2;
+    }
+
     public void diagnostico(enfermedad enfermedadPaciente, doubleLinkedList Enfermedades){
         resultadoDiagnostico = new BinaryHeap<>();
+        resultadoDiagnostico2 = new PQueue();
         System.out.println(Enfermedades.length());
         long startTime = System.nanoTime();
         for(int i=0; i<Enfermedades.length();i++) {
@@ -19,7 +28,8 @@ public class diagnosticoArrays {
             stringDoubleLinkedList intersecciónSintomas = interseccionArreglos(enfermedadX.sintomas,enfermedadPaciente.sintomas);
             int instersecciones = intersecciónSintomas.length()+InterseccionSignos.length();
             enfermedad enfermedadTmp = new enfermedad(enfermedadX.name,InterseccionSignos, intersecciónSintomas, instersecciones);// se crea la enfermedad con el número de intersecciones
-            resultadoDiagnostico.insert(enfermedadTmp); // se agrega la enfermedad a la cola, donde la que tenga mayor numero de coincidencia tendra la mayor prioridad
+            //resultadoDiagnostico.insert(enfermedadTmp); // se agrega la enfermedad a la cola, donde la que tenga mayor numero de coincidencia tendra la mayor prioridad
+            resultadoDiagnostico2.add(enfermedadTmp);
             //los datos se reciben ordenados
         }
         long endTime = System.nanoTime() - startTime;

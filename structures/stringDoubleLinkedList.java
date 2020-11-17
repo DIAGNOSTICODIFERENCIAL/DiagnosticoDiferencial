@@ -1,5 +1,7 @@
 package structures;
 
+import java.util.ArrayList;
+
 public class stringDoubleLinkedList {
     stringDoubleNode head;
     stringDoubleNode tail;
@@ -217,5 +219,16 @@ public class stringDoubleLinkedList {
             fast = fast.next.next;
         }
         return slow;
+    }
+
+    public ArrayList<String> toArrayList(){
+        ArrayList<String> ans = new ArrayList<String>();
+        stringDoubleNode tmp = head;
+        if(length==0){ System.out.println("EmptyList");return null;};
+        for(int i=0; i<length;i++){
+            ans.add(tmp.data);
+            tmp = tmp.next;
+        }
+        return ans;
     }
 }

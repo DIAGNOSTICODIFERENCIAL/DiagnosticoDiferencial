@@ -42,8 +42,10 @@ public class MainActivity extends FlutterActivity {
         enfermedad enfermedadPaciente = createEnfermedad(sintomas,signos);
         diagnosticoArrays diagnostico = new diagnosticoArrays();
         diagnostico.diagnostico(enfermedadPaciente,enfermedades);
-        ArrayList arrayListResultadoDiagnostico = diagnostico.getDiagnostico().toArrayList();
+        //ArrayList arrayListResultadoDiagnostico = diagnostico.getDiagnostico().toArrayList();
         //arrayListResultadoDiagnostico.add(historial.toArrayList());
+        PQueue resultado = diagnostico.getDiagnostico2();
+        ArrayList arrayListResultadoDiagnostico = resultado.toArrayList();
         return arrayListResultadoDiagnostico;
         //BinaryHeap monti = new BinaryHeap();
     }
