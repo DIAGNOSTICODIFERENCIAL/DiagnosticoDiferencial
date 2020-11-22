@@ -1,16 +1,15 @@
-# diagnostico_diferencial
+# HERRAMIENTA PARA DIAGNÓSTICO DIFERENCIAL.
 
-A new Flutter application.
+Aunque el campo médico ha evolucionado exponencialmente, el diagnóstico de enfermedades es un tema que suele ser dispensioso y costoso, aún cuando los profesionales de la salud suelen estár muy bien preparados, en el momento del diagnóstico existen ciertas posibilidades que pueden no ser tomadas en
+cuenta además la literatura predominante es de origen
+americano o europeo y no suelen tener en cuenta las
+prevalencia de enfermedades tropicales a las que se
+encuentra expuesta la mayoría de población
+Colombiana tales como Leptospirosis, Tuberculosis, Dengue, Ricketsiosis
 
-## Getting Started
+Esta herramienta de diagnóstico diferencial se propone e implementa como método de apoyo para la medicina y las poblaciones rurales, las cuales se ven bastante afectadas por este tipo de enfermedades.
 
-This project is a starting point for a Flutter application.
+## Implementación
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Esta primera implementación, al ser netamente académica se da mediante estructuras de datos implementadas por el equipo de desarrollo, haciendo pruebas de eficiencia entre estas y buscando el mejor manejo de datos posible.
+Se hace uso (hasta el momento) de estructuras de datos lineales como son listas enlazadas y doblemente enlazadas, pilas y arreglos.
