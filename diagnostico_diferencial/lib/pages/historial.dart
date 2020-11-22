@@ -2,32 +2,46 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:expansion_card/expansion_card.dart';
+import 'package:flutter/services.dart';
+
+import 'resultadoDiagnostico.dart';
 
 
 
 class Historial extends StatefulWidget {
   @override
-  List resultado;
+  List registros;
 
-  Historial(List resultado) {
+
+  Historial(registro) {
+    registros = registro;
     LineSplitter ls = new LineSplitter();
-    List newResult;
+    List newResult =[];
+    int contador = 0;
+    var platform = MethodChannel("prueba/cien");
 
-    for(int i=0;i<resultado.length;i++){
-      List<String> lines = ls.convert(resultado[i]);
-      newResult.add(lines);
+    print(registros);
+
+    if (registros!=null){
+      registros.forEach((enfermedad){
+        String busqueda = enfermedad[0]; //busqueda realizada
+        busqueda=busqueda.replaceAll("Enfermedad: Desconocida", "Busqueda #"+contador.toString()); //contador de busquedas
+        List resultados = enfermedad[1]; //resultados
+        newResult.add([Text(busqueda, style: TextStyle(color: Colors.black),), resultados]);
+        contador++;
+      });
     }
-    this.resultado = newResult;
+    this.registros = newResult;
   }
 
   _HistorialState createState() {
-    return new _HistorialState(resultado);
+    return new _HistorialState(registros);
   }
 }
 
 class _HistorialState extends State<Historial> {
   @override
-
+  int contador =0;
   List resultado;
   int softBlue = 0xffE7F3FC;
   int mainBlue = 0xff048AEC;
@@ -35,6 +49,7 @@ class _HistorialState extends State<Historial> {
   _HistorialState(this.resultado);
 
   Widget build(BuildContext context) {
+
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Color(softBlue),
@@ -47,108 +62,39 @@ class _HistorialState extends State<Historial> {
             onPressed: () => Navigator.pop(context, false),
           ),
         ),
+
         body: SingleChildScrollView(
             child: Column(
-              children: resultado[resultado.length-1].map((enfermedad) {
+              children: resultado.map((enfermedad) {
                 return ExpansionCard(
                   initiallyExpanded: false,
-                  title: Container(
+
+                  title: RaisedButton(
+                    color: Colors.blue[300],
+                    splashColor: Colors.black, shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                      side: BorderSide(color: Colors.blue)
+                  ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Resultado(enfermedad[1])),
+                      );
+                    },
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text(
-                          enfermedad[0][0],
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                          ),//nombre de la enfermedad
-                        ),
+                        enfermedad[0],
+
                       ],
                     ),
                   ),
                   children: <Widget>[
                     Container(
-                      //para signos
                       margin: EdgeInsets.symmetric(horizontal: 7),
-                      child: Column(
-                        children:
-                        enfermedad[1].map<Widget>((sintoma) {
-                          if(sintoma==enfermedad[1][0]){
-                            return Column(
-                              children: [
-                                Text(
-                                  "Sintomas",
-                                  style: TextStyle(
-                                    color: Color(mainBlue),
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20,
-                                  ),
-                                ),
-                                Text(
-                                  sintoma,
-                                  style: TextStyle(
-                                    color: Colors.blueAccent,
-                                    fontSize: 15,
-                                  ),
-                                )
-                              ],
-                            );
-                          }
-                          else{
-                            return Text(
-                              sintoma,
-                              style: TextStyle(
-                                color: Colors.blueAccent,
-                                fontSize: 15,
-                              ),
-                            );
-                          }
-
-                        }).toList(),
-                      ),
+                      child: enfermedad[0],
                     ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                      //para signos
-                      margin: EdgeInsets.symmetric(horizontal: 7),
-                      child: Column(
-                        children:
-                        enfermedad[2].map<Widget>((signo) {
-                          if(signo==enfermedad[2][0]){
-                            return Column(
-                              children: [
-                                Text(
-                                  "Signos",
-                                  style: TextStyle(
-                                    color: Color(mainBlue),
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20,
-                                  ),
-                                ),
-                                Text(
-                                  signo,
-                                  style: TextStyle(
-                                    color: Colors.blueAccent,
-                                    fontSize: 15,
-                                  ),
-                                )
-                              ],
-                            );
-                          }
-                          return Text(
-                            signo,
-                            style: TextStyle(
-                              color: Colors.blueAccent,
-                              fontSize: 15,
-                            ),
-                          );
-                        }).toList(),
-                      ),
-                    ),
-                  ],
+                  ]
                 );
               }).toList(),
             )),

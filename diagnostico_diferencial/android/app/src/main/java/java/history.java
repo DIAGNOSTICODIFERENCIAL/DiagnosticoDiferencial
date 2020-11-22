@@ -4,21 +4,25 @@ import java.util.ArrayList;
 import structures.*;
 
 public class history {
-    dynamicArray historial; //se usa un array para guardar las búsquedas
+    dynamicArray registro; //se usa un array para guardar las búsquedas
     int size;
 
     public history(){
-        historial = new dynamicArray();
+        registro = new dynamicArray();
         size = 0;
     }
-    public void addSearch(String lista){
-        historial.insert(lista);
+    public void addSearch(String enfermedad, ArrayList resultado){
+        ArrayList datos = new ArrayList();
+        datos.add(enfermedad);
+        datos.add(resultado);
+        registro.insert(datos);
         size++;
+
     }
     
 
     public ArrayList toArrayList(){
-        return this.historial.toArrayList();
+        return this.registro.toArrayList();
     }
     
 }

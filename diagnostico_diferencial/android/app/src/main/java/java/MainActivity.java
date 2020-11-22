@@ -33,10 +33,17 @@ public class MainActivity extends FlutterActivity {
                                     e.printStackTrace();
                                 }
                             }
+                            if(call.method.equals("gethistorial")){
+                                /*String greetings = helloFromNativeCode();
+                                result.success(greetings);*/
+                                ArrayList resultado = gethistorial();
+                                System.out.println("resultaaaado 2222"+resultado);
+                                result.success(resultado);
+                            }
                         }
                 );
     }
-    private ArrayList main(ArrayList<String> sintomas,ArrayList<String> signos,ArrayList<String> database) throws IOException {
+    private ArrayList main(ArrayList<String> sintomas, ArrayList<String> signos, ArrayList<String> database) throws IOException {
         dataReader dr = new dataReader();
         doubleLinkedList<enfermedad> enfermedades = dr.readArrayList(database);
         enfermedad enfermedadPaciente = createEnfermedad(sintomas,signos);
@@ -46,9 +53,11 @@ public class MainActivity extends FlutterActivity {
         //arrayListResultadoDiagnostico.add(historial.toArrayList());
         PQueue resultado = diagnostico.getDiagnostico2();
         ArrayList arrayListResultadoDiagnostico = resultado.toArrayList();
+        historial.addSearch(enfermedadPaciente.toString(),arrayListResultadoDiagnostico);
         return arrayListResultadoDiagnostico;
         //BinaryHeap monti = new BinaryHeap();
     }
+
 
     private enfermedad createEnfermedad(ArrayList<String> sintomas,ArrayList<String> signos){
         enfermedad enfermedadP = new enfermedad();
@@ -57,11 +66,12 @@ public class MainActivity extends FlutterActivity {
         enfermedadP.sintomas = new stringDoubleLinkedList(sintomas);
         //System.out.println("Se creaaaaa pacienteeee sin ordenar"+enfermedadP);
         enfermedadP.sort();
-        historial.addSearch(enfermedadP.toString());
         //System.out.println("Se creaaaaa pacienteeee"+enfermedadP);
         return enfermedadP;
     }
-
-
+    private ArrayList gethistorial(){
+        ArrayList registros = historial.toArrayList();
+        return registros;
+    }
 
 }

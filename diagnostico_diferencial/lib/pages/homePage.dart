@@ -31,9 +31,12 @@ class _HomeState extends State<Home> {
   double buttonsHeight = 50;
 
   List resultado;
+  List historial;
 
   var platform = MethodChannel("prueba/cien");
   String hiText = "";
+
+  InlineSpan get textSpan => null;
 
   void _hi(signos,sintomas,database) async {
 
@@ -51,8 +54,6 @@ class _HomeState extends State<Home> {
         hiText = "Failed";
       });
     }
-
-
   }
 
 
@@ -89,10 +90,7 @@ class _HomeState extends State<Home> {
                   leading: Icon(Icons.pending_actions_rounded),
                   title: Text("Historial de diagnosticos"),
                   onTap: (){
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Historial(resultado)),
-                    );
+                    actaulizarhistorial();
                   },
                 ),
               ],
@@ -103,7 +101,7 @@ class _HomeState extends State<Home> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Container(
-                margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                margin: EdgeInsets.fromLTRB(20, 50, 10, 0),
                 alignment: Alignment(20, 30),
                 child: Text.rich(
                   TextSpan(
@@ -111,72 +109,96 @@ class _HomeState extends State<Home> {
                       style: TextStyle(fontWeight: FontWeight.bold),
                       children: [
                         TextSpan(
-                          text: "Usuario ",
+                          text: "Usuario \n",
                           style: TextStyle(fontWeight: FontWeight.normal),
+                        ),TextSpan(
+                          text:"app ofrece una evaluación general de los signos y síntomas presentes en el paciente. A continuación seleccione los signos y sintomas observados en su evaluación médica, despues proceda pulsar el botón de diagnostico.",
+                          style:  TextStyle(fontSize: 20.0, fontWeight:FontWeight.w300)
                         )
                       ]),
                   style: TextStyle(fontSize: 50),
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  ButtonTheme(
-                    minWidth: 100.0,
-                    height: buttonsHeight,
-                    child: RaisedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/sintomas');
-                      },
-                      child: Text(
-                        "SÍNTOMAS",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
+              Container(
+                margin: EdgeInsets.fromLTRB(20, 50, 10, 0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    ButtonTheme(
+                      minWidth: 200.0,
+                      height: 50,
+                      child: RaisedButton(
+                        color: Colors.blue[200],
+                        splashColor: Colors.black, shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                          side: BorderSide(color: Colors.blue)
+                      ),
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/sintomas');
+                        },
+                        child: Text(
+                          "SÍNTOMAS",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
-                      color: Color(mainBlue),
                     ),
-                  ),
-                  ButtonTheme(
-                    minWidth: 100.0,
-                    height: buttonsHeight,
-                    child: RaisedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/signos');
-                      },
-                      child: Text(
-                        "SIGNOS",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
+                    ButtonTheme(
+                      minWidth: 200.0,
+                      height: 50,
+                      child: RaisedButton(
+                        color: Colors.blue[200],
+                        splashColor: Colors.black, shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                          side: BorderSide(color: Colors.blue)
+                      ),
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/signos');
+                        },
+                        child: Text(
+                          "SIGNOS",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
-                      color: Color(mainBlue),
                     ),
-                  ),
-                ],
-              ),
-              ButtonTheme(
-                minWidth: 150.0,
-                height: 80,
-                child: RaisedButton(
-                  onPressed: () {
-                    readCounter(_dataBasePath,appState.signos,appState.sintomas);
+                    ButtonTheme(
+                      minWidth: 200.0,
+                      height: 50,
+                      child: RaisedButton(
+                        color: Colors.red[200],
+                        splashColor: Colors.black, shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                          side: BorderSide(color: Colors.blue)
+                      ),
+                        onPressed: () {
+                          readCounter(_dataBasePath,appState.signos,appState.sintomas);
 
-                  },
-                  child: Text(
-                    "DIAGNÓSTICO",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                        },
+                        child: Text(
+                          "DIAGNÓSTICO",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                  color: Color(mainRed),
+                  ],
                 ),
               ),
             ],
-          )),
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {},
+            child: Icon(Icons.pending_actions),
+          ),
+        ),
     );
   }
 
@@ -217,5 +239,33 @@ class _HomeState extends State<Home> {
   }
 
 
+  Future<String> actaulizarhistorial() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    try {
+      List response;
+      try{
+        response = await platform.invokeListMethod("gethistorial");
+        historial = response;
+        print(historial);
+        setState(() {
+          historial = response;
+          hiText = "Success!";
+        });
+      } on Exception{
+        print(Exception);
+        setState(() {
+          hiText = "Failed";
+        });
+      }
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => Historial(historial)),
+      );
+    } catch (e) {
+      print(e);
+      // If encountering an error, return 0.
+      return "F";
+    }
+  }
 
 }
