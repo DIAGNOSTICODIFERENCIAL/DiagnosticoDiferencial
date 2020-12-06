@@ -1,5 +1,7 @@
 package structures;
 
+import java.util.ArrayList;
+
 public class dynamicArray {
     private Object[] array;
     private int size;
@@ -12,7 +14,6 @@ public class dynamicArray {
         this.capacity = 2;
         number++;
     }
-
     public int getSize() {
         return this.size;
     }
@@ -85,6 +86,15 @@ public class dynamicArray {
             content = content + this.array[i] + " ";
         }
         return content;
+    }
+
+    public ArrayList toArrayList(){
+        ArrayList arrayListAns = new ArrayList();
+        for(int i=0; i<this.size;i++){
+            //this.array[i] es una enferemdad.toString()
+            arrayListAns.add(this.array[i]);
+        }
+        return arrayListAns;
     }
 
 
