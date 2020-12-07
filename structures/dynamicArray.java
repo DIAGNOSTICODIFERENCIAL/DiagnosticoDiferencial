@@ -1,6 +1,8 @@
 package structures;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import diagnosisTools.*;
 
 public class dynamicArray {
     private Object[] array;
@@ -14,6 +16,7 @@ public class dynamicArray {
         this.capacity = 2;
         number++;
     }
+
     public int getSize() {
         return this.size;
     }
@@ -96,6 +99,5 @@ public class dynamicArray {
         }
         return arrayListAns;
     }
-
 
 }

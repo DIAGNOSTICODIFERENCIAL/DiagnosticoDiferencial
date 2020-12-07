@@ -1,6 +1,6 @@
 package structures;
 
-import src.diagnosisTools.enfermedad;
+import diagnosisTools.enfermedad;
 
 import java.util.ArrayList;
 
