@@ -1,4 +1,4 @@
-package src.diagnosisTools;
+package diagnostico_diferencial.android.app.src.main.java.diagnosisTools;
 import src.main.history;
 
 import java.util.ArrayList;

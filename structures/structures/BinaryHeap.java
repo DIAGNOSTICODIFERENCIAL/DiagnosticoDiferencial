@@ -1,7 +1,7 @@
-package diagnostico_diferencial.android.app.src.main.java.structures;
+package structures;
 import java.util.ArrayList;
 
-import diagnosisTools.enfermedad;
+import src.diagnosisTools.enfermedad;
 
 public class BinaryHeap<Anytipe extends Comparable<? super Anytipe>> {
 

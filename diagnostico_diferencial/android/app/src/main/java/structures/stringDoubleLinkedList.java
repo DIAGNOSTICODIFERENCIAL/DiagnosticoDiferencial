@@ -1,11 +1,13 @@
-package structures;
+package diagnostico_diferencial.android.app.src.main.java.structures;
+
+import structures.stringDoubleNode;
 
 import java.util.ArrayList;
 
 
 public class stringDoubleLinkedList {
-    stringDoubleNode head;
-    stringDoubleNode tail;
+    structures.stringDoubleNode head;
+    structures.stringDoubleNode tail;
     int length;
 
     public stringDoubleLinkedList(){
@@ -27,17 +29,17 @@ public class stringDoubleLinkedList {
 
     public stringDoubleLinkedList(String data){
         this.length = 1;
-        this.head = new stringDoubleNode(data);
+        this.head = new structures.stringDoubleNode(data);
         this.tail = this.head;
     }
 
     public stringDoubleLinkedList(ArrayList<String> data){
         this.length = data.size();
-        this.head = new stringDoubleNode(data.get(0));
+        this.head = new structures.stringDoubleNode(data.get(0));
         System.out.println("cabezaaa "+head.data);
-        stringDoubleNode tmp = head;
+        structures.stringDoubleNode tmp = head;
         for(int i=1; i<data.size(); i++){
-            tmp.next = new stringDoubleNode(data.get(i),tmp);
+            tmp.next = new structures.stringDoubleNode(data.get(i),tmp);
             tmp = tmp.next;
         }
         if(data.size()!=1){
@@ -51,22 +53,22 @@ public class stringDoubleLinkedList {
 
     public void append(String data){
         if(length==0){
-            this.head = new stringDoubleNode(data);
+            this.head = new structures.stringDoubleNode(data);
             this.tail = this.head;
             this.tail.prev = this.head;
             this.head.next = this.tail;
             this.length++;
             return;
         }
-        stringDoubleNode tmp = this.tail;
-        this.tail = new stringDoubleNode(data, tmp);
+        structures.stringDoubleNode tmp = this.tail;
+        this.tail = new structures.stringDoubleNode(data, tmp);
         tmp.next = this.tail;
         length++;
     }
 
     public String getK(int index) {
         if(index>length || index<0){
-            stringDoubleNode aux = new stringDoubleNode("0");
+            structures.stringDoubleNode aux = new structures.stringDoubleNode("0");
             return (String) aux.data;
         }
         if (index == 0){
@@ -77,7 +79,7 @@ public class stringDoubleLinkedList {
             return (String) this.tail.data;
         }
         else{
-            stringDoubleNode aux = this.head;
+            structures.stringDoubleNode aux = this.head;
             //si algo quitar ese -1 jaja
             for(int i = 0; i < index-1; i++){
                 aux = aux.next;
@@ -107,7 +109,7 @@ public class stringDoubleLinkedList {
         if(idx>=length || idx<0){
             System.out.println("Index out of range");
         }
-        stringDoubleNode tmp = this.head;
+        structures.stringDoubleNode tmp = this.head;
         for(int i=1; i<idx; i++){
             tmp = tmp.next;
         }
@@ -126,18 +128,18 @@ public class stringDoubleLinkedList {
             return;
         }
         if(index==0){
-            stringDoubleNode aux = this.head;
-            this.head = new stringDoubleNode(data);
+            structures.stringDoubleNode aux = this.head;
+            this.head = new structures.stringDoubleNode(data);
             this.head.next = aux;
             length++;
             return;
         }
         else{
-            stringDoubleNode tmp = head;
+            structures.stringDoubleNode tmp = head;
             for(int i=0; i<index; i++){
                 if(i+1==index){
-                    stringDoubleNode aux = tmp.next;
-                    tmp.next = new stringDoubleNode(data);
+                    structures.stringDoubleNode aux = tmp.next;
+                    tmp.next = new structures.stringDoubleNode(data);
                     tmp.next.next = aux;
                     length++;
                     return;
@@ -153,7 +155,7 @@ public class stringDoubleLinkedList {
 
     public int getIndex(String value) {
         int idx = 0;
-        stringDoubleNode tmp =  this.head;
+        structures.stringDoubleNode tmp =  this.head;
         while(tmp.data!=value) {
             tmp = tmp.next;
             idx++;
@@ -162,7 +164,7 @@ public class stringDoubleLinkedList {
     }
 
     public void print(){
-        stringDoubleNode tmp = head;
+        structures.stringDoubleNode tmp = head;
         if(length==0) System.out.println("Empty List");
         for(int i=0; i<length;i++){
             System.out.print(tmp.data+" ");
@@ -174,7 +176,7 @@ public class stringDoubleLinkedList {
     @Override
     public String toString(){
         String ans = "";
-        stringDoubleNode tmp = head;
+        structures.stringDoubleNode tmp = head;
         if(length==0) ans="Empty List";
         for(int i=0; i<length;i++){
             ans = ans + tmp.data+" ";
@@ -187,33 +189,33 @@ public class stringDoubleLinkedList {
     public void sort(){
         this.head = mergeSort(this.head);
     }
-    public stringDoubleNode mergeSort(stringDoubleNode head){
+    public structures.stringDoubleNode mergeSort(structures.stringDoubleNode head){
         //Caso base, si es nula o es de longitud 1
         if (head == null || head.next == null) {
             return head;
         }
 
         // Obtenemos la mitad de la lista
-        stringDoubleNode middle = getMiddle(head);
-        stringDoubleNode nextofmiddle = middle.next;
+        structures.stringDoubleNode middle = getMiddle(head);
+        structures.stringDoubleNode nextofmiddle = middle.next;
 
         // set the next of middle node to null
         middle.next = null;
 
         // Apply mergeSort on left list
-        stringDoubleNode left = mergeSort(head);
+        structures.stringDoubleNode left = mergeSort(head);
 
         // Apply mergeSort on right list
-        stringDoubleNode right = mergeSort(nextofmiddle);
+        structures.stringDoubleNode right = mergeSort(nextofmiddle);
 
         // Merge the left and right lists
-        stringDoubleNode sortedlist = mergeLists(left, right);
+        structures.stringDoubleNode sortedlist = mergeLists(left, right);
         return sortedlist;
 
     }
-    public stringDoubleNode mergeLists(stringDoubleNode a, stringDoubleNode b){
+    public structures.stringDoubleNode mergeLists(structures.stringDoubleNode a, structures.stringDoubleNode b){
 
-        stringDoubleNode result = null;
+        structures.stringDoubleNode result = null;
         /* Base cases */
         if (a == null)
             return b;
@@ -233,11 +235,11 @@ public class stringDoubleLinkedList {
 
 
     }
-    public stringDoubleNode getMiddle(stringDoubleNode head){
+    public structures.stringDoubleNode getMiddle(structures.stringDoubleNode head){
         if (head == null)
             return head;
 
-        stringDoubleNode slow = head, fast = head;
+        structures.stringDoubleNode slow = head, fast = head;
 
         while (fast.next != null && fast.next.next != null) {
             slow = slow.next;

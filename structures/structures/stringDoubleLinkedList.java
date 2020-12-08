@@ -1,70 +1,88 @@
-package diagnostico_diferencial.android.app.src.main.java.structures;
+package structures;
 
-import diagnosisTools.enfermedad;
-import structures.doubleNode;
+import java.util.ArrayList;
 
-public class doubleLinkedList<t> {
-    structures.doubleNode head;
-    structures.doubleNode tail;
+
+public class stringDoubleLinkedList {
+    stringDoubleNode head;
+    stringDoubleNode tail;
     int length;
 
-
-
-
-
-    public doubleLinkedList(){
+    public stringDoubleLinkedList(){
         this.length = 0;
         this.head = null;
         this.tail = null;
     }
 
-    public t getFirst(){
-        return (t) this.head.data;
+    public String getFirst(){
+        return (String) this.head.data;
     }
 
-    public t getLast(){
-        return (t) this.tail.data;
+    public String getLast(){
+        return (String) this.tail.data;
     }
 
-    public doubleLinkedList(t data){
+
+
+
+    public stringDoubleLinkedList(String data){
         this.length = 1;
-        this.head = new structures.doubleNode(data);
+        this.head = new stringDoubleNode(data);
         this.tail = this.head;
     }
 
-    public void append(t data){
+    public stringDoubleLinkedList(ArrayList<String> data){
+        this.length = data.size();
+        this.head = new stringDoubleNode(data.get(0));
+        System.out.println("cabezaaa "+head.data);
+        stringDoubleNode tmp = head;
+        for(int i=1; i<data.size(); i++){
+            tmp.next = new stringDoubleNode(data.get(i),tmp);
+            tmp = tmp.next;
+        }
+        if(data.size()!=1){
+            if(data.size()==2){{
+                this.tail = tmp.prev;
+            }}
+            this.tail = tmp.prev.prev;
+        }
+        else {this.tail = this.head;}
+    }
+
+    public void append(String data){
         if(length==0){
-            this.head = new structures.doubleNode(data);
+            this.head = new stringDoubleNode(data);
             this.tail = this.head;
             this.tail.prev = this.head;
             this.head.next = this.tail;
             this.length++;
             return;
         }
-        structures.doubleNode tmp = this.tail;
-        this.tail = new structures.doubleNode(data, tmp);
+        stringDoubleNode tmp = this.tail;
+        this.tail = new stringDoubleNode(data, tmp);
         tmp.next = this.tail;
         length++;
     }
 
-    public t getK(int index) {
+    public String getK(int index) {
         if(index>length || index<0){
-            System.out.println("Index out of range");
-            structures.doubleNode aux = new structures.doubleNode(0);
-            return (t) aux.data;
+            stringDoubleNode aux = new stringDoubleNode("0");
+            return (String) aux.data;
         }
         if (index == 0){
-            return (t) this.head.data;
+            return (String) this.head.data;
         }
         else if(index==length-1){
-            return (t) this.tail.data;
+            System.out.println("indeeeex "+index);
+            return (String) this.tail.data;
         }
         else{
-            structures.doubleNode aux = this.head;
-            for(int i = 0; i < index; i++){
+            stringDoubleNode aux = this.head;
+            //si algo quitar ese -1 jaja
+            for(int i = 0; i < index-1; i++){
                 aux = aux.next;
             }
-            return (t) aux.data;
+            return aux.data;
         }
     }
 
@@ -89,7 +107,7 @@ public class doubleLinkedList<t> {
         if(idx>=length || idx<0){
             System.out.println("Index out of range");
         }
-        structures.doubleNode tmp = this.head;
+        stringDoubleNode tmp = this.head;
         for(int i=1; i<idx; i++){
             tmp = tmp.next;
         }
@@ -98,7 +116,7 @@ public class doubleLinkedList<t> {
         length--;
     }
 
-    public void insertAt(int index,t data){
+    public void insertAt(int index,String data){
         if(index!=0 && index>=length || index<0){
             System.out.println("Index out of range");
             return;
@@ -108,18 +126,18 @@ public class doubleLinkedList<t> {
             return;
         }
         if(index==0){
-            structures.doubleNode aux = this.head;
-            this.head = new structures.doubleNode(data);
+            stringDoubleNode aux = this.head;
+            this.head = new stringDoubleNode(data);
             this.head.next = aux;
             length++;
             return;
         }
         else{
-            structures.doubleNode tmp = head;
+            stringDoubleNode tmp = head;
             for(int i=0; i<index; i++){
                 if(i+1==index){
-                    structures.doubleNode aux = tmp.next;
-                    tmp.next = new structures.doubleNode(data);
+                    stringDoubleNode aux = tmp.next;
+                    tmp.next = new stringDoubleNode(data);
                     tmp.next.next = aux;
                     length++;
                     return;
@@ -133,9 +151,9 @@ public class doubleLinkedList<t> {
         return this.length;
     }
 
-    public int getIndex(t value) {
+    public int getIndex(String value) {
         int idx = 0;
-        structures.doubleNode tmp =  this.head;
+        stringDoubleNode tmp =  this.head;
         while(tmp.data!=value) {
             tmp = tmp.next;
             idx++;
@@ -144,7 +162,7 @@ public class doubleLinkedList<t> {
     }
 
     public void print(){
-        structures.doubleNode tmp = head;
+        stringDoubleNode tmp = head;
         if(length==0) System.out.println("Empty List");
         for(int i=0; i<length;i++){
             System.out.print(tmp.data+" ");
@@ -152,46 +170,50 @@ public class doubleLinkedList<t> {
         }
         System.out.println();
     }
+
+    @Override
     public String toString(){
         String ans = "";
-        structures.doubleNode tmp = head;
+        stringDoubleNode tmp = head;
         if(length==0) ans="Empty List";
         for(int i=0; i<length;i++){
             ans = ans + tmp.data+" ";
             tmp = tmp.next;
         }
+        ans = ans + "\n";
         return ans;
     }
     /*-----------------------Merge Sort--------------------------------------------*/
     public void sort(){
         this.head = mergeSort(this.head);
     }
-    public structures.doubleNode mergeSort(structures.doubleNode head){
+    public stringDoubleNode mergeSort(stringDoubleNode head){
         //Caso base, si es nula o es de longitud 1
         if (head == null || head.next == null) {
             return head;
         }
 
         // Obtenemos la mitad de la lista
-        structures.doubleNode middle = getMiddle(head);
-        structures.doubleNode nextofmiddle = middle.next;
+        stringDoubleNode middle = getMiddle(head);
+        stringDoubleNode nextofmiddle = middle.next;
 
         // set the next of middle node to null
         middle.next = null;
 
         // Apply mergeSort on left list
-        structures.doubleNode left = mergeSort(head);
+        stringDoubleNode left = mergeSort(head);
 
         // Apply mergeSort on right list
-        structures.doubleNode right = mergeSort(nextofmiddle);
+        stringDoubleNode right = mergeSort(nextofmiddle);
 
         // Merge the left and right lists
-        structures.doubleNode sortedlist = mergeLists(left, right);
+        stringDoubleNode sortedlist = mergeLists(left, right);
         return sortedlist;
 
     }
-    public structures.doubleNode mergeLists(structures.doubleNode a, structures.doubleNode b){
-        structures.doubleNode result = null;
+    public stringDoubleNode mergeLists(stringDoubleNode a, stringDoubleNode b){
+
+        stringDoubleNode result = null;
         /* Base cases */
         if (a == null)
             return b;
@@ -199,7 +221,7 @@ public class doubleLinkedList<t> {
             return a;
 
         /* Pick either a or b, and recur */
-        if (((enfermedad) a.data).signos.length+((enfermedad) a.data).sintomas.length>((enfermedad) b.data).signos.length+((enfermedad) b.data).sintomas.length){
+        if (a.data.compareTo(b.data)<=0){
             result = a;
             result.next = mergeLists(a.next, b);
         }
@@ -211,11 +233,11 @@ public class doubleLinkedList<t> {
 
 
     }
-    public structures.doubleNode getMiddle(structures.doubleNode head){
+    public stringDoubleNode getMiddle(stringDoubleNode head){
         if (head == null)
             return head;
 
-        doubleNode slow = head, fast = head;
+        stringDoubleNode slow = head, fast = head;
 
         while (fast.next != null && fast.next.next != null) {
             slow = slow.next;
@@ -223,4 +245,16 @@ public class doubleLinkedList<t> {
         }
         return slow;
     }
+
+    public ArrayList<String> toArrayList(){
+        ArrayList<String> ans = new ArrayList<String>();
+        stringDoubleNode tmp = head;
+        if(length==0){ System.out.println("EmptyList");return null;};
+        for(int i=0; i<length;i++){
+            ans.add(tmp.data);
+            tmp = tmp.next;
+        }
+        return ans;
+    }
+
 }

@@ -1,8 +1,8 @@
-package diagnostico_diferencial.android.app.src.main.java.structures;
+package structures;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
-import diagnosisTools.*;
+import src.diagnosisTools.*;
 
 public class dynamicArray {
     private Object[] array;
