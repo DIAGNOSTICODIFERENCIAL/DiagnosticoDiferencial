@@ -1,6 +1,6 @@
 package structures;
 
-import src.diagnosisTools.paciente;
+import diagnosisTools.paciente;
 
 import static java.lang.StrictMath.pow;
 
