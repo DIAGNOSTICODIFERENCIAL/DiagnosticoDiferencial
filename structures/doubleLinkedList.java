@@ -1,6 +1,6 @@
 package structures;
 
-import diagnosisTools.enfermedad;
+import src.diagnosisTools.enfermedad;
 
 public class doubleLinkedList<t> {
     doubleNode head;

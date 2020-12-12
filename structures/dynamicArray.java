@@ -2,7 +2,7 @@ package structures;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
-import diagnosisTools.*;
+import src.diagnosisTools.*;
 
 public class dynamicArray {
     private Object[] array;
