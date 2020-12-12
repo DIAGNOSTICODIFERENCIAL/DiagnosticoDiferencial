@@ -1,4 +1,4 @@
-package diagnostico_diferencial.android.app.src.main.java.java;
+package java;
 import java.util.ArrayList;
 
 import structures.*;

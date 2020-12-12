@@ -1,4 +1,4 @@
-package diagnostico_diferencial.android.app.src.main.java.diagnosisTools;
+package diagnosisTools;
 
 import structures.*;
 
