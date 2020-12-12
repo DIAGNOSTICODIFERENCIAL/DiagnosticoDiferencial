@@ -1,5 +1,3 @@
-package diagnostico_diferencial.android
-
 include ':app'
 
 def localPropertiesFile = new File(rootProject.projectDir, "local.properties")

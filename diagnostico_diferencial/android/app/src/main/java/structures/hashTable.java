@@ -1,7 +1,6 @@
-package diagnostico_diferencial.android.app.src.main.java.structures;
+package structures;
 
-import src.diagnosisTools.paciente;
-import structures.dynamicArray;
+import diagnosisTools.paciente;
 
 import static java.lang.StrictMath.pow;
 

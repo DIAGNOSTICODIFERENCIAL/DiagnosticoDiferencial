@@ -1,11 +1,9 @@
-package diagnostico_diferencial.android.app.src.main.java.structures;
-
-import structures.DNode;
+package structures;
 
 public class DoubleList<T> {
     int length;
-    structures.DNode first; // referencia al primer nodo
-    structures.DNode last;
+    DNode first; // referencia al primer nodo
+    DNode last;
 
     public DoubleList() {
         this.length=0;
@@ -16,13 +14,13 @@ public class DoubleList<T> {
 
     void insert(T data) {
         if (this.length==0){
-            this.first = new structures.DNode(data,null);
+            this.first = new DNode(data,null);
             this.last=this.first;
             length++;
             return;
         }else{
 
-        structures.DNode newDnode = new structures.DNode(data, this.last);
+        DNode newDnode = new DNode(data, this.last);
         this.last.next=newDnode;
         this.last = newDnode;
         length++;
@@ -44,7 +42,7 @@ public class DoubleList<T> {
         }
         
         else{
-            structures.DNode aux = this.first;
+            DNode aux = this.first;
             while(aux.next.data != data){
                 aux = aux.next;
                 if (aux.next == null){
@@ -73,12 +71,12 @@ public class DoubleList<T> {
         } 
         else if (index >= length || index<0){
             System.out.println("indice fuera de rango");
-            structures.DNode aux = new structures.DNode(-1, this.last);
+            DNode aux = new DNode (-1, this.last); 
             return (T) aux.data;
         }
         
         else{
-            structures.DNode aux = this.first;
+            DNode aux = this.first;
             for(int i = 0; i < index;i++ ){
                 aux = aux.next;
             }
@@ -126,10 +124,10 @@ public class DoubleList<T> {
  
     void insertFirst(T first) {
         if (this.first==null){
-            structures.DNode newfirst = new structures.DNode(first, null);
+            DNode newfirst = new DNode (first, null);
             this.first= newfirst;
         }else{
-            structures.DNode newfirst = new structures.DNode(first, null);
+            DNode newfirst = new DNode(first, null);
             newfirst.next = this.first;
             this.first.prev=newfirst;
             this.first = newfirst;
@@ -146,7 +144,7 @@ public class DoubleList<T> {
         if (length==0){
             System.out.println("Lista vacía");
         }
-        structures.DNode aux = this.first;
+        DNode aux = this.first;
         int indice = 0; //indice empieza en 0
         while (aux.data!=data){
             if (aux.next == null ){
@@ -174,12 +172,12 @@ public class DoubleList<T> {
             length++;
             return;
         }else{
-            structures.DNode aux = this.first;
+            DNode aux = this.first;
             for(int i =0; i<index;i++){
             
                 if(i+1==index){
-                    structures.DNode auxNext = aux.next;
-                    structures.DNode newNode = new structures.DNode(data,aux);
+                    DNode auxNext = aux.next;
+                    DNode newNode = new DNode (data,aux);
                     newNode.next = auxNext;
                     aux.next = newNode;
                     auxNext.prev= newNode;

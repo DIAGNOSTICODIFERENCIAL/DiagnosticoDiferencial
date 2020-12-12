@@ -1,4 +1,4 @@
-package diagnostico_diferencial.android.app.src.main.java.structures;
+package structures;
 
 public class doubleNode<t>{
     t data;

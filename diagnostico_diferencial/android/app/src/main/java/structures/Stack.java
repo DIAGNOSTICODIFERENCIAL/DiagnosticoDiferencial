@@ -1,6 +1,4 @@
-package diagnostico_diferencial.android.app.src.main.java.structures;
-
-import structures.simpleNode;
+package structures;
 
 public class Stack<t> {
     simpleNode top;
