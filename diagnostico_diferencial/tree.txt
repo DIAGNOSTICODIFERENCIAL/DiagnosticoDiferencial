@@ -1,0 +1,53 @@
+.
+├── android
+│   ├── app
+│   │   ├── build.gradle
+│   │   └── src
+│   │       ├── debug
+│   │       │   └── AndroidManifest.xml
+│   │       ├── main
+│   │            ├── AndroidManifest.xml
+│   │            ├── java
+│   │                ├── diagnosisTools
+│   │                │   ├── diagnosticoArrays.java
+│   │                │   ├── enfermedad.java
+│   │                │   └── paciente.java
+│   │                ├── io
+│   │                │   └── flutter
+│   │                │       └── plugins
+│   │                │           └── GeneratedPluginRegistrant.java
+│   │                ├── java
+│   │                │   ├── dataReader.java
+│   │                │   ├── history.java
+│   │                │   ├── MainActivity.java
+│   │                │   └── texts
+│   │                │       ├── enfermedadPaciente.txt
+│   │                │       └── muestra2.txt
+│   │                ├── structures
+│   │                    ├── BinaryHeap.java
+│   │                    ├── DNode.java
+│   │                    ├── doubleLinkedList.java
+│   │                    ├── DoubleList.java
+│   │                    ├── doubleNode.java
+│   │                    ├── dynamicArray.java
+│   │                    ├── hashTable.java
+│   │                    ├── PQueue.java
+│   │                    ├── queue.java
+│   │                    ├── simpleLinkedList.java
+│   │                    ├── simpleNode.java
+│   │                    ├── Stack.java
+│   │                    ├── stringDoubleLinkedList.java
+│   │                    └── stringDoubleNode.java
+├── lib
+     ├── main.dart
+     └── pages
+         ├── checkButton.dart
+         ├── checklistSignos.dart
+         ├── checklistSintomas.dart
+         ├── historial.dart
+         ├── homePage.dart
+         ├── MyModel.dart
+         ├── Registros.dart
+         └── resultadoDiagnostico.dart
+
+655 directories, 1203 files
