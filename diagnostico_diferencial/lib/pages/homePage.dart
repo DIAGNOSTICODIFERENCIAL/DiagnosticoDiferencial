@@ -102,114 +102,116 @@ class _HomeState extends State<Home> {
             ],
           ),
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              margin: EdgeInsets.fromLTRB(20, 50, 10, 0),
-              alignment: Alignment(20, 30),
-              child: Text.rich(
-                TextSpan(
-                    text: "Bienvenido, ",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                    children: [
-                      TextSpan(
-                        text: "Usuario \n",
-                        style: TextStyle(fontWeight: FontWeight.normal),
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.fromLTRB(20, 50, 10, 0),
+                alignment: Alignment(20, 30),
+                child: Text.rich(
+                  TextSpan(
+                      text: "Bienvenido, ",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                      children: [
+                        TextSpan(
+                          text: "Usuario \n",
+                          style: TextStyle(fontWeight: FontWeight.normal),
+                        ),
+                        TextSpan(
+                            text:
+                                "app ofrece una evaluación general de los signos y síntomas presentes en el paciente. A continuación seleccione los signos y sintomas observados en su evaluación médica, despues proceda pulsar el botón de diagnostico.",
+                            style: TextStyle(
+                                fontSize: 20.0, fontWeight: FontWeight.w300))
+                      ]),
+                  style: TextStyle(fontSize: 50),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(20, 50, 10, 0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    TextField(
+                      controller: id,
+                      decoration: InputDecoration(
+                        icon: Icon(Icons.perm_identity),
+                        hintText: "Id del paciente",
+                        filled: true,
+                        fillColor: Colors.blue[100],
                       ),
-                      TextSpan(
-                          text:
-                              "app ofrece una evaluación general de los signos y síntomas presentes en el paciente. A continuación seleccione los signos y sintomas observados en su evaluación médica, despues proceda pulsar el botón de diagnostico.",
+                    ),
+                    ButtonTheme(
+                      minWidth: 200.0,
+                      height: 50,
+                      child: RaisedButton(
+                        color: Colors.blue[200],
+                        splashColor: Colors.black,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18.0),
+                            side: BorderSide(color: Colors.blue)),
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/sintomas');
+                        },
+                        child: Text(
+                          "SÍNTOMAS",
                           style: TextStyle(
-                              fontSize: 20.0, fontWeight: FontWeight.w300))
-                    ]),
-                style: TextStyle(fontSize: 50),
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                    ButtonTheme(
+                      minWidth: 200.0,
+                      height: 50,
+                      child: RaisedButton(
+                        color: Colors.blue[200],
+                        splashColor: Colors.black,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18.0),
+                            side: BorderSide(color: Colors.blue)),
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/signos');
+                        },
+                        child: Text(
+                          "SIGNOS",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                    ButtonTheme(
+                      minWidth: 200.0,
+                      height: 50,
+                      child: RaisedButton(
+                        color: Colors.red[200],
+                        splashColor: Colors.black,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18.0),
+                            side: BorderSide(color: Colors.blue)),
+                        onPressed: () {
+                          readCounter(_dataBasePath, appState.signos,
+                              appState.sintomas, id.text);
+                        },
+                        child: Text(
+                          "DIAGNÓSTICO",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Container(
-              margin: EdgeInsets.fromLTRB(20, 50, 10, 0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  TextField(
-                    controller: id,
-                    decoration: InputDecoration(
-                      icon: Icon(Icons.perm_identity),
-                      hintText: "Id del paciente",
-                      filled: true,
-                      fillColor: Colors.blue[100],
-                    ),
-                  ),
-                  ButtonTheme(
-                    minWidth: 200.0,
-                    height: 50,
-                    child: RaisedButton(
-                      color: Colors.blue[200],
-                      splashColor: Colors.black,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18.0),
-                          side: BorderSide(color: Colors.blue)),
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/sintomas');
-                      },
-                      child: Text(
-                        "SÍNTOMAS",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                  ButtonTheme(
-                    minWidth: 200.0,
-                    height: 50,
-                    child: RaisedButton(
-                      color: Colors.blue[200],
-                      splashColor: Colors.black,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18.0),
-                          side: BorderSide(color: Colors.blue)),
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/signos');
-                      },
-                      child: Text(
-                        "SIGNOS",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                  ButtonTheme(
-                    minWidth: 200.0,
-                    height: 50,
-                    child: RaisedButton(
-                      color: Colors.red[200],
-                      splashColor: Colors.black,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18.0),
-                          side: BorderSide(color: Colors.blue)),
-                      onPressed: () {
-                        readCounter(_dataBasePath, appState.signos,
-                            appState.sintomas, id.text);
-                      },
-                      child: Text(
-                        "DIAGNÓSTICO",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
